@@ -1,16 +1,27 @@
-import Link from "next/link"
-import { Github, Linkedin, Twitter, Heart } from "lucide-react"
+"use client";
+import Link from "next/link";
+import { Github, Linkedin, Twitter, Heart } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="py-8 border-t border-white/10 bg-background text-center relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex justify-center space-x-6 mb-8 text-muted-foreground">
-          <Link href="https://github.com" target="_blank" className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200">
+          <Link
+            href="https://github.com/soyalfredodev"
+            target="_blank"
+            className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+          >
             <Github className="w-5 h-5" />
           </Link>
-          <Link href="https://instagram.com/soyalfredo.dev" target="_blank" className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200">
-             <svg
+          <Link
+            href="https://instagram.com/soyalfredo.dev"
+            target="_blank"
+            className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+          >
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -27,21 +38,25 @@ export function Footer() {
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
             </svg>
           </Link>
-          <Link href="https://linkedin.com" target="_blank" className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200">
-             <Linkedin className="w-5 h-5" />
-          </Link>
-          <Link href="https://twitter.com" target="_blank" className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200">
-             <Twitter className="w-5 h-5" />
+          <Link
+            href="https://linkedin.com"
+            target="_blank"
+            className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+          >
+            <Linkedin className="w-5 h-5" />
           </Link>
         </div>
-        
+
         <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-          Designed & Built with <Heart className="w-4 h-4 text-red-500 animate-pulse" /> by <span className="text-foreground font-medium">Alfredo Hurtado</span>
+          {t("footer.builtWith")}{" "}
+          <Heart className="w-4 h-4 text-red-500 animate-pulse" />{" "}
+          {t("footer.by")}{" "}
+          <span className="text-foreground font-medium">Alfredo Hurtado</span>
         </p>
         <p className="text-xs text-muted-foreground/50 mt-2">
-          © {new Date().getFullYear()} All rights reserved.
+          © {new Date().getFullYear()} {t("footer.rights")}
         </p>
       </div>
     </footer>
-  )
+  );
 }

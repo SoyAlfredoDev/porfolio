@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,11 +16,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Alfredo Hurtado | Creative Developer & Frontend Engineer",
-  description: "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
-  keywords: ["Frontend Engineer", "Creative Developer", "React", "Next.js", "TypeScript", "Tailwind CSS", "Portfolio"],
+  description:
+    "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
+  keywords: [
+    "Frontend Engineer",
+    "Creative Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Portfolio",
+  ],
   openGraph: {
     title: "Alfredo Hurtado | Creative Developer",
-    description: "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
+    description:
+      "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
     type: "website",
     locale: "en_US",
     url: "https://portfolio.alfredohurtado.com",
@@ -42,7 +54,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+          {/* Language Switcher integrated globally */}
+          <LanguageSwitcher />
+        </LanguageProvider>
       </body>
     </html>
   );

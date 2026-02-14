@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/Button"
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
-import Link from "next/link"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { ArrowRight, Github, Linkedin } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
-         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
-         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px]" />
       </div>
 
       <div className="container mx-auto px-6 text-center z-10">
@@ -21,14 +21,14 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="mb-8 relative w-32 h-32 mx-auto"
         >
-           <div className="absolute inset-0 bg-gradient-to-tr from-primary to-purple-500 rounded-full blur-lg opacity-50 animate-pulse" />
-           <div className="relative w-full h-full rounded-full border-2 border-white/10 overflow-hidden bg-secondary">
-             {/* Replace with /public/profile.jpg */}
-             <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-xs text-muted-foreground">
-                Photo
-             </div>
-             {/* <Image src="/profile.jpg" alt="Alfredo Hurtado" fill className="object-cover" /> */}
-           </div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary to-purple-500 rounded-full blur-lg opacity-50 animate-pulse" />
+          <div className="relative w-full h-full rounded-full border-2 border-white/10 overflow-hidden bg-secondary">
+            {/* Replace with /public/profile.jpg */}
+            <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-xs text-muted-foreground">
+              Photo
+            </div>
+            {/* <Image src="/profile.jpg" alt="Alfredo Hurtado" fill className="object-cover" /> */}
+          </div>
         </motion.div>
 
         <motion.div
@@ -51,8 +51,8 @@ export function Hero() {
           Building digital <br className="hidden md:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">
             experiences
-          </span>
-          {" "}that matter.
+          </span>{" "}
+          that matter.
         </motion.h1>
 
         <motion.p
@@ -61,7 +61,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
         >
-          Senior Frontend Engineer & Creative Developer crafting modern, 
+          Senior Frontend Engineer & Creative Developer crafting modern,
           accessible, and high-performance web applications.
         </motion.p>
 
@@ -90,10 +90,25 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 flex items-center justify-center gap-6 text-muted-foreground"
         >
-          <Link href="https://github.com" target="_blank" className="hover:text-foreground transition-colors">
+          <Link
+            href="https://github.com/soyalfredodev"
+            target="_blank"
+            className="hover:text-foreground transition-colors"
+          >
             <Github className="w-6 h-6" />
           </Link>
-          <Link href="https://instagram.com/soyalfredo.dev" target="_blank" className="hover:text-foreground transition-colors">
+          <Link
+            href="https://linkedin.com"
+            target="_blank"
+            className="hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+          >
+            <Linkedin className="w-5 h-5" />
+          </Link>
+          <Link
+            href="https://instagram.com/soyalfredo.dev"
+            target="_blank"
+            className="hover:text-foreground transition-colors"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -111,16 +126,17 @@ export function Hero() {
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
             </svg>
           </Link>
-          <Link href="https://twitter.com" target="_blank" className="hover:text-foreground transition-colors">
-            <Twitter className="w-6 h-6" />
-          </Link>
-          <Link href="mailto:soyalfredo.dev@gmail.com" className="hover:text-foreground transition-colors">
-             <div className="w-6 h-6 flex items-center justify-center">
-                <span className="text-xl">@</span>
-             </div>
+
+          <Link
+            href="mailto:soyalfredo.dev@gmail.com"
+            className="hover:text-foreground transition-colors"
+          >
+            <div className="w-6 h-6 flex items-center justify-center">
+              <span className="text-xl">@</span>
+            </div>
           </Link>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
