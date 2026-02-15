@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 // import { Button } from "@/components/ui/Button" // Optional if needed in navbar
 
-const isValidLink = (href: string) => href.startsWith("/") || href.startsWith("#");
+const isValidLink = (href: string) =>
+  href.startsWith("/") || href.startsWith("#");
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -16,19 +18,19 @@ const navLinks = [
   { name: "Play & Win", href: "/game" },
   { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
-]
+];
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [scrolled, setScrolled] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -36,11 +38,16 @@ export function Navbar() {
       animate={{ y: 0 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "glass border-b border-white/10 py-4" : "py-6 bg-transparent"
+        scrolled
+          ? "glass border-b border-white/10 py-4"
+          : "py-6 bg-transparent",
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
+        <Link
+          href="/"
+          className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity"
+        >
           AH<span className="text-primary">.</span>
         </Link>
 
@@ -56,16 +63,20 @@ export function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full" />
             </Link>
           ))}
+          <ThemeToggle />
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X /> : <Menu />}
-        </button>
+        {/* Mobile Toggle & Theme */}
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
+          <button
+            className="text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -93,5 +104,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
+  );
 }

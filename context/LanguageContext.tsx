@@ -1,109 +1,56 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-import { z } from "zod";
-import contentCallback from "../dictionaries/content.json";
+import React, { createContext, useContext, useMemo } from "react";
 
-// Define the schema for the dictionary
-const contentSchema = z.object({
-  footer: z.object({
-    builtWith: z.string(),
-    by: z.string(),
-    rights: z.string(),
-  }),
-  switcher: z.object({
-    changeTo: z.string(),
-  }),
-});
+type Dictionary = Record<string, any>;
 
-export type Content = z.infer<typeof contentSchema>;
-
-// Validate the entire dictionary
-const dictionarySchema = z.object({
-  es: contentSchema,
-  en: contentSchema,
-});
-
-const parsedContent = dictionarySchema.parse(contentCallback);
-
-type Language = "es" | "en";
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  // t function: accepts a key string, returns translation or fallback
+type LanguageContextValue = {
+  locale: string;
   t: (key: string) => string;
+};
+
+const LanguageContext = createContext<LanguageContextValue | null>(null);
+
+function getByPath(obj: any, path: string) {
+  return path
+    .split(".")
+    .reduce((acc, part) => (acc ? acc[part] : undefined), obj);
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined,
-);
+export function LanguageProvider({
+  locale,
+  dictionary,
+  children,
+}: {
+  locale: string;
+  dictionary: Dictionary;
+  children: React.ReactNode;
+}) {
+  const t = useMemo(() => {
+    return (key: string) => {
+      const value = getByPath(dictionary, key);
+      return typeof value === "string" ? value : key;
+    };
+  }, [dictionary]);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("es");
-  // Keep track of mounted state to avoid hydration mismatch if using localStorage
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const storedLang = localStorage.getItem("language") as Language;
-    if (storedLang && (storedLang === "es" || storedLang === "en")) {
-      setLanguage(storedLang);
-    }
-  }, []);
-
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem("language", lang);
-  };
-
-  const t = useCallback(
-    (key: string): string => {
-      // Nested key access function
-      const getNestedValue = (obj: any, path: string): string | undefined => {
-        return path.split(".").reduce((prev, curr) => {
-          return prev ? prev[curr] : undefined;
-        }, obj);
-      };
-
-      // 1. Try current language
-      const value = getNestedValue(parsedContent[language], key);
-      if (value) return value;
-
-      // 2. Fallback to default language ('es')
-      const fallbackValue = getNestedValue(parsedContent["es"], key);
-      if (fallbackValue) return fallbackValue;
-
-      // 3. Return key as last resort
-      console.warn(`Translation missing for key: ${key}`);
-      return key;
-    },
-    [language],
-  );
-
-  // If not mounted yet, we can render with default or nothing.
-  // Given requirements, we render children.
-  // "Valor inicial debe ser estrictamente Español" -> useState("es") handles this.
+  const value = useMemo(() => ({ locale, t }), [locale, t]);
 
   return (
-    <LanguageContext.Provider
-      value={{ language, setLanguage: handleSetLanguage, t }}
-    >
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
 }
 
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context; // Returns { language, setLanguage, t }
+export function useT() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useT must be used inside <LanguageProvider />");
+  return ctx.t; // ✅ esto es una función
+}
+
+export function useLocale() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx)
+    throw new Error("useLocale must be used inside <LanguageProvider />");
+  return ctx.locale;
 }

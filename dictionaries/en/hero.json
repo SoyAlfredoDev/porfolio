@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "badge": "Available for freelance work",
+    "title": "Hi, I'm",
+    "subtitle": "Welcome to my",
+    "subtitle2": "digital",
+    "subtitle3": "portfolio.",
+    "description": "Senior Frontend Developer specialized in building modern, accessible, and high-performance web applications.",
+    "cta": {
+      "projects": "View Projects",
+      "contact": "Contact Me"
+    }
+  }
+}

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
+
 import { LanguageProvider } from "@/context/LanguageContext";
-import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { ThemeProvider } from "@/context/ThemeProvider";
+import { getDictionary, type Locale, locales } from "@/lib/translation";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,21 +47,36 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  const dictionary = await getDictionary(locale as Locale);
+
   return (
-    <html lang="en">
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LanguageProvider>
-          {children}
-          {/* Language Switcher integrated globally */}
-          <LanguageSwitcher />
-        </LanguageProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LanguageProvider locale={locale} dictionary={dictionary}>
+            {children}
+            <LanguageSwitcher />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

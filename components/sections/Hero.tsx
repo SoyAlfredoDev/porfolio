@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { useT } from "@/context/LanguageContext";
 
 export function Hero() {
+  const t = useT();
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
       {/* Background Elements */}
@@ -36,8 +38,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-secondary/50 border border-white/5 text-sm text-muted-foreground mb-6 backdrop-blur-sm">
-            Available for freelance work
+          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-sm text-primary mb-6 backdrop-blur-sm shadow-[0_0_15px_rgba(1,198,118,0.3)]">
+            {t("hero.badge")}
           </span>
         </motion.div>
 
@@ -47,12 +49,13 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
-          Hi, I'm <span className="text-foreground">Alfredo</span>.<br />
-          Building digital <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">
-            experiences
+          {t("hero.title")} <span className="text-foreground">Alfredo</span>.
+          <br />
+          {t("hero.subtitle")}{" "}
+          <span className="text-primary drop-shadow-[0_0_15px_rgba(1,198,118,0.5)]">
+            {t("hero.subtitle2")}
           </span>{" "}
-          that matter.
+          {t("hero.subtitle3")}
         </motion.h1>
 
         <motion.p
@@ -61,8 +64,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
         >
-          Senior Frontend Engineer & Creative Developer crafting modern,
-          accessible, and high-performance web applications.
+          {t("hero.description")}
         </motion.p>
 
         <motion.div
@@ -73,13 +75,13 @@ export function Hero() {
         >
           <Link href="#projects">
             <Button size="lg" className="group">
-              View Projects
+              {t("hero.cta.projects")}
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
           <Link href="#contact">
             <Button variant="outline" size="lg">
-              Contact Me
+              {t("hero.cta.contact")}
             </Button>
           </Link>
         </motion.div>

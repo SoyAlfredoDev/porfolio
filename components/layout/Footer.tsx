@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { Github, Linkedin, Twitter, Heart } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useT } from "@/context/LanguageContext";
 
 export function Footer() {
-  const { t } = useLanguage();
+  const t = useT();
   return (
     <footer className="py-8 border-t border-white/10 bg-background text-center relative z-10">
       <div className="container mx-auto px-6">
@@ -48,9 +48,8 @@ export function Footer() {
         </div>
 
         <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-          {t("footer.builtWith")}{" "}
+          {t("footer.title")}{" "}
           <Heart className="w-4 h-4 text-red-500 animate-pulse" />{" "}
-          {t("footer.by")}{" "}
           <span className="text-foreground font-medium">Alfredo Hurtado</span>
         </p>
         <p className="text-xs text-muted-foreground/50 mt-2">

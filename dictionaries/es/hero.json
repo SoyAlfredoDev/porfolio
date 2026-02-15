@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "badge": "Disponible para trabajos freelance",
+    "title": "Hola, soy",
+    "subtitle": "Bienvenido a mi",
+    "subtitle2": "portafolio",
+    "subtitle3": "digital.",
+    "description": "Desarrollador Frontend Senior especializado en la creación de aplicaciones web modernas, accesibles y optimizadas para alto rendimiento.",
+    "cta": {
+      "projects": "Ver Proyectos",
+      "contact": "Contáctame"
+    }
+  }
+}
