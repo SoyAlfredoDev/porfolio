@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/Button";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useT } from "@/context/LanguageContext";
 
 export function Contact() {
+  const t = useT();
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">(
     "idle",
   );
@@ -34,25 +36,21 @@ export function Contact() {
           className="mb-16 text-center max-w-2xl mx-auto"
         >
           <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
-            05. What's Next?
+            05. {t("contact.badge")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Get In Touch</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            {t("contact.title")}
+          </h2>
           <p className="text-lg text-muted-foreground">
-            Although I'm not currently looking for any new opportunities, my
-            inbox is always open. Whether you have a question or just want to
-            say hi, I'll try my best to get back to you!
+            {t("contact.description")}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
-            <h3 className="text-2xl font-semibold">
-              Let's talk about everything!
-            </h3>
-            <p className="text-muted-foreground">
-              Don't like forms? Send me an email.
-            </p>
+            <h3 className="text-2xl font-semibold">{t("contact.title2")}</h3>
+            <p className="text-muted-foreground">{t("contact.description2")}</p>
 
             <div className="space-y-4">
               <div className="flex items-center space-x-4 text-muted-foreground hover:text-foreground transition-colors group">
@@ -67,7 +65,7 @@ export function Contact() {
                 <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <span>Cork, Ireland</span>
+                <span>{t("contact.address")}</span>
               </div>
             </div>
           </div>
@@ -80,7 +78,7 @@ export function Contact() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
-                  Name
+                  {t("contact.form.name")}
                 </label>
                 <input
                   id="name"
@@ -92,7 +90,7 @@ export function Contact() {
               </div>
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
-                  Email
+                  {t("contact.form.email")}
                 </label>
                 <input
                   id="email"
@@ -106,14 +104,14 @@ export function Contact() {
 
             <div className="space-y-2">
               <label htmlFor="message" className="text-sm font-medium">
-                Message
+                {t("contact.form.message")}
               </label>
               <textarea
                 id="message"
                 required
                 rows={4}
                 className="w-full bg-background/50 border border-white/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                placeholder="Your message here..."
+                placeholder={t("contact.form.messagePlaceholder")}
               />
             </div>
 
@@ -128,12 +126,12 @@ export function Contact() {
               disabled={formState === "submitting" || formState === "success"}
             >
               {formState === "submitting" ? (
-                "Sending..."
+                t("contact.form.sending")
               ) : formState === "success" ? (
-                "Message Sent!"
+                t("contact.form.success")
               ) : (
                 <>
-                  Send Message <Send className="ml-2 w-4 h-4" />
+                  {t("contact.form.submit")} <Send className="ml-2 w-4 h-4" />
                 </>
               )}
             </Button>

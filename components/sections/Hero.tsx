@@ -51,10 +51,8 @@ export function Hero() {
         >
           {t("hero.title")} <span className="text-foreground">Alfredo</span>.
           <br />
-          {t("hero.subtitle")}{" "}
-          <span className="text-primary drop-shadow-[0_0_15px_rgba(1,198,118,0.5)]">
-            {t("hero.subtitle2")}
-          </span>{" "}
+          {t("hero.subtitle")} {/* ES: pinta subtitle2 | EN: pinta subtitle3 */}
+          <span className="text-primary">{t("hero.subtitle2")}</span>{" "}
           {t("hero.subtitle3")}
         </motion.h1>
 

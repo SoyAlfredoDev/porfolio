@@ -12,12 +12,12 @@ const isValidLink = (href: string) =>
   href.startsWith("/") || href.startsWith("#");
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Play & Win", href: "/game" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/es/#about" },
+  { name: "Skills", href: "/es/#skills" },
+  { name: "Projects", href: "/es/#projects" },
+  { name: "Play & Win", href: "/es/game" },
+  { name: "Experience", href: "/es/#experience" },
+  { name: "Contact", href: "/es/#contact" },
 ];
 
 export function Navbar() {
@@ -48,7 +48,7 @@ export function Navbar() {
           href="/"
           className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity"
         >
-          AH<span className="text-primary">.</span>
+          Alfredo<span className="text-primary">.</span>
         </Link>
 
         {/* Desktop Menu */}

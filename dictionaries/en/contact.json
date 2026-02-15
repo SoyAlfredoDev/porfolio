@@ -1,0 +1,19 @@
+{
+  "contact": {
+    "badge": "What's Next?",
+    "title": "Do you have a project in mind?",
+    "title2": "Let’s build digital experiences together",
+    "description": "If you need a quote or would like to send a project proposal, fill out the form below and I will get back to you as soon as possible.",
+    "description2": "Don't like forms? Send me an email.",
+    "address": "Cork, Ireland",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "messagePlaceholder": "Your message here...",
+      "submit": "Send Message",
+      "success": "Message Sent!",
+      "sending": "Sending..."
+    }
+  }
+}

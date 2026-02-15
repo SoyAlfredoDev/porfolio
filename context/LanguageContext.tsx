@@ -45,7 +45,7 @@ export function LanguageProvider({
 export function useT() {
   const ctx = useContext(LanguageContext);
   if (!ctx) throw new Error("useT must be used inside <LanguageProvider />");
-  return ctx.t; // ✅ esto es una función
+  return ctx.t;
 }
 
 export function useLocale() {

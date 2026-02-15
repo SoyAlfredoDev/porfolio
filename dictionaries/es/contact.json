@@ -1,0 +1,19 @@
+{
+  "contact": {
+    "badge": "¿Qué sigue?",
+    "title": "Tienes un proyecto en mente?",
+    "title2": "Construyamos experiencias digitales juntos",
+    "description": "Si necesitas una cotización o quieres enviarme una propuesta de trabajo, escríbeme llenando el formulario y te responderé lo antes posible.",
+    "description2": "¿No te gustan los formularios? Envíame un correo electrónico.",
+    "address": "Cork, Irlanda",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "messagePlaceholder": "Tu mensaje aquí...",
+      "submit": "Enviar mensaje",
+      "success": "Mensaje enviado!",
+      "sending": "Enviando..."
+    }
+  }
+}
