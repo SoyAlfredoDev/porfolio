@@ -263,23 +263,7 @@ html[data-style="retro"] .site-brand {
   text-transform: uppercase;
 }
 
-/* Footer */
-html[data-style="retro"] .site-footer {
-  position: relative;
-  z-index: 20;
-  background: var(--retro-ground) !important;
-  color: #fff8e7 !important;
-  border-top: 4px solid var(--retro-ink) !important;
-}
-
-html[data-style="retro"] .site-footer a,
-html[data-style="retro"] .site-footer p {
-  color: #fff8e7 !important;
-}
-
-html[data-style="retro"] .site-footer a:hover {
-  color: var(--retro-coin) !important;
-}
+/* Footer — see footer.css (opaque shell above atmospheres) */
 
 /* Style switcher */
 html[data-style="retro"] .style-switcher {
@@ -376,8 +360,8 @@ html[data-style="retro"] ::selection {
 /* Let body sky / ground show through; atmosphere sits above page wash */
 html[data-style="retro"] main {
   background-color: transparent !important;
-  /* Room for fixed arcade floor / lang switcher — content never sits under ground */
-  padding-bottom: 6.5rem !important;
+  /* Lang switcher clearance — footer shell owns the ground */
+  padding-bottom: 0 !important;
 }
 
 /* Hero socials sit near the dirt strip — keep them cream for contrast */
@@ -390,13 +374,16 @@ html[data-style="retro"] main > section:first-of-type .text-muted-foreground {
   color: #fff8e7 !important;
 }
 
-/* Content above world decor; decor above bare section backgrounds */
+/* Content above world decor; footer shell is separate at z-50 */
 html[data-style="retro"] .container,
-html[data-style="retro"] .site-footer,
 html[data-style="retro"] .word-game,
 html[data-style="retro"] .works {
   position: relative;
   z-index: 40;
+}
+
+html[data-style="retro"] .site-footer-shell {
+  z-index: 50;
 }
 
 html[data-style="retro"] nav.site-nav {
@@ -405,7 +392,7 @@ html[data-style="retro"] nav.site-nav {
 
 /* ── Live arcade world (RetroWorldDecor) ── */
 .retro-atmosphere {
-  /* Below content (40) and nav (80); above bare page wash */
+  /* Below content (40) and footer shell (50); above bare page wash */
   z-index: 15 !important;
 }
 

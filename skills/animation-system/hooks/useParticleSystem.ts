@@ -17,7 +17,7 @@ export type ParticleConfig = {
 const BASE_COUNT: Record<ParticlePreset, number> = {
   stars: 48,
   energy: 28,
-  snow: 36,
+  snow: 56,
   "aurora-dust": 40,
 };
 
@@ -56,10 +56,11 @@ export function useParticleSystem(
 
     let count = BASE_COUNT[preset];
     if (deviceTier === "medium") count = Math.round(count * 0.65);
-    if (isMobile) count = Math.round(count * 0.4);
-    if (lightSnow && !canHeavyFx) count = Math.max(12, Math.round(count * 0.55));
+    if (isMobile) count = Math.round(count * 0.45);
+    if (lightSnow && !canHeavyFx) count = Math.max(16, Math.round(count * 0.6));
+    if (lightSnow && isMobile) count = Math.max(14, count);
     if (activeStyle === "christmas" && preset === "snow" && canHeavyFx) {
-      count += 8;
+      count += 12;
     }
     if (activeStyle === "retro" && preset === "stars") count += 12;
 

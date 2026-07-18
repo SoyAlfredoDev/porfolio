@@ -1,6 +1,7 @@
 {
   "footer": {
-    "title": "Made with ❤️ by",
+    "title": "Made with",
+    "by": "by",
     "rights": "All rights reserved",
     "links": {
       "home": "Home",

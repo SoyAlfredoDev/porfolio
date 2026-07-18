@@ -1,0 +1,353 @@
+/* ── Footer shell: opaque final section above atmospheres ── */
+
+.site-footer-shell {
+  position: relative;
+  z-index: 50;
+  isolation: isolate;
+  margin-top: 2.5rem;
+  /* Kill any bleed from fixed atmospheres behind this block */
+  background-color: var(--footer-bg, var(--card));
+  overflow: hidden;
+}
+
+.site-footer-bridge {
+  height: 1.25rem;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--footer-bg, var(--card))
+  );
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: var(--footer-bg, var(--card));
+  color: var(--footer-fg, var(--muted-foreground));
+  border-top: 1px solid var(--footer-border, var(--border));
+  padding: 2.5rem 0 max(6rem, calc(env(safe-area-inset-bottom, 0px) + 5rem));
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem));
+  }
+
+  .site-footer-shell {
+    margin-top: 3.5rem;
+  }
+}
+
+.site-footer-link {
+  color: var(--footer-fg, var(--muted-foreground));
+  border-radius: var(--radius);
+}
+
+.site-footer-link:hover,
+.site-footer-link:focus-visible {
+  color: var(--footer-accent, var(--primary));
+  outline: none;
+}
+
+.site-footer-social {
+  color: var(--footer-fg, var(--muted-foreground));
+  border: 1px solid transparent;
+}
+
+.site-footer-social:hover,
+.site-footer-social:focus-visible {
+  color: var(--footer-accent, var(--primary));
+  background: color-mix(in srgb, var(--footer-accent, var(--primary)) 12%, transparent);
+  outline: none;
+}
+
+.site-footer-name {
+  color: var(--footer-heading, var(--foreground));
+}
+
+.site-footer-credit,
+.site-footer-copy {
+  color: var(--footer-fg, var(--muted-foreground));
+}
+
+/* ── Modern ── */
+html[data-style="modern"] {
+  --footer-bg: #eef2f7;
+  --footer-fg: #4b5563;
+  --footer-heading: #0b1220;
+  --footer-accent: #01c676;
+  --footer-border: #dbe3ee;
+}
+
+html.dark[data-style="modern"],
+html[data-style="modern"].dark,
+html[data-theme="dark"][data-style="modern"] {
+  --footer-bg: #011830;
+  --footer-fg: #9aabbf;
+  --footer-heading: #ffffff;
+  --footer-accent: #01c676;
+  --footer-border: #1e3a5f;
+}
+
+html[data-style="modern"] .site-footer-bridge {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--background) 0%, transparent),
+    var(--footer-bg)
+  );
+}
+
+html[data-style="modern"] .site-footer-social {
+  border-radius: 999px;
+}
+
+/* ── Retro: arcade ground panel ── */
+html[data-style="retro"] {
+  --footer-bg: #6b3f14;
+  --footer-fg: #fff8e7;
+  --footer-heading: #fff8e7;
+  --footer-accent: #f8c800;
+  --footer-border: #0a0a0a;
+}
+
+html[data-style="retro"] .site-footer-shell {
+  margin-top: 0;
+  box-shadow: 0 -4px 0 #0a0a0a;
+}
+
+html[data-style="retro"] .site-footer-bridge {
+  height: 1.75rem;
+  background: linear-gradient(
+    to bottom,
+    #3d9e00 0%,
+    #3d9e00 35%,
+    #6b3f14 35%,
+    #6b3f14 100%
+  );
+  border-top: 3px solid #0a0a0a;
+  image-rendering: pixelated;
+}
+
+html[data-style="retro"] .site-footer {
+  border-top: 3px solid #0a0a0a;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #6b3f14 0 48px,
+      #5a3510 48px 49px
+    ),
+    #6b3f14;
+}
+
+html[data-style="retro"] .site-footer-link {
+  font-family: var(--font-press-start), monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+html[data-style="retro"] .site-footer-social {
+  border: 2px solid #0a0a0a;
+  border-radius: 4px;
+  background: #fff8e7;
+  color: #0a0a0a;
+  box-shadow: 2px 2px 0 #0a0a0a;
+}
+
+html[data-style="retro"] .site-footer-social:hover,
+html[data-style="retro"] .site-footer-social:focus-visible {
+  background: #f8c800;
+  color: #0a0a0a;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #0a0a0a;
+}
+
+html[data-style="retro"] .site-footer-copy {
+  font-family: var(--font-press-start), monospace;
+  font-size: 0.45rem;
+  line-height: 1.6;
+}
+
+/* Hide fixed arcade floor — footer is the ground now */
+html[data-style="retro"] .retro-world-floor {
+  display: none !important;
+}
+
+/* ── Christmas: deep night panel + gold edge + snowbank ── */
+html[data-style="christmas"] {
+  --footer-bg: #0a1510;
+  --footer-fg: #c5d4c8;
+  --footer-heading: #f4efe6;
+  --footer-accent: #d4af37;
+  --footer-border: rgba(212, 175, 55, 0.55);
+  --footer-snow: #f4efe6;
+  --footer-snow-deep: #e8e2d6;
+}
+
+html[data-style="christmas"] .site-footer-shell {
+  box-shadow: none;
+  /* Let the snowbank sit above the night panel edge */
+  overflow: visible;
+}
+
+html[data-style="christmas"] .site-footer-bridge {
+  position: relative;
+  height: 2.75rem;
+  margin-bottom: -0.35rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 31, 20, 0) 0%,
+    rgba(10, 21, 16, 0.55) 55%,
+    #0a1510 100%
+  );
+  overflow: visible;
+}
+
+/* Accumulated snow along the footer lip */
+html[data-style="christmas"] .site-footer-snowbank {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2.5rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+html[data-style="christmas"] .site-footer-snowbank-mound {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  background: radial-gradient(
+    ellipse 70% 100% at 50% 100%,
+    var(--footer-snow) 0%,
+    var(--footer-snow) 52%,
+    var(--footer-snow-deep) 78%,
+    transparent 80%
+  );
+  filter: drop-shadow(0 -1px 2px rgba(244, 239, 230, 0.35));
+}
+
+html[data-style="christmas"] .site-footer-snowbank-mound-a {
+  left: -6%;
+  width: 34%;
+  height: 1.15rem;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+html[data-style="christmas"] .site-footer-snowbank-mound-b {
+  left: 18%;
+  width: 44%;
+  height: 2.15rem;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+html[data-style="christmas"] .site-footer-snowbank-mound-c {
+  left: 48%;
+  width: 38%;
+  height: 1.45rem;
+  border-radius: 45% 55% 0 0 / 100% 100% 0 0;
+}
+
+html[data-style="christmas"] .site-footer-snowbank-mound-d {
+  left: 72%;
+  width: 36%;
+  height: 1.95rem;
+  border-radius: 55% 45% 0 0 / 100% 100% 0 0;
+}
+
+html[data-style="christmas"] .site-footer-snowbank-sparkle {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 55%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 28% 70%, rgba(212, 175, 55, 0.75), transparent),
+    radial-gradient(1.5px 1.5px at 47% 40%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 63% 62%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 81% 48%, rgba(212, 175, 55, 0.65), transparent),
+    radial-gradient(1px 1px at 93% 68%, rgba(255, 255, 255, 0.8), transparent);
+  opacity: 0.85;
+  animation: footer-snow-twinkle 3.2s ease-in-out infinite;
+}
+
+@keyframes footer-snow-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="christmas"] .site-footer-snowbank-sparkle {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+html[data-style="christmas"] .site-footer {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid rgba(212, 175, 55, 0.45);
+  background: linear-gradient(180deg, #0c1a12 0%, #07110c 100%);
+  /* Clear snowbank lip */
+  padding-top: 2.75rem;
+}
+
+html[data-style="christmas"] .site-footer-link:hover,
+html[data-style="christmas"] .site-footer-link:focus-visible {
+  color: #c41e3a;
+}
+
+html[data-style="christmas"] .site-footer-social {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 999px;
+  background: rgba(26, 46, 32, 0.8);
+}
+
+html[data-style="christmas"] .site-footer-social:hover,
+html[data-style="christmas"] .site-footer-social:focus-visible {
+  color: #c41e3a;
+  border-color: rgba(196, 30, 58, 0.55);
+  background: rgba(196, 30, 58, 0.15);
+}
+
+html[data-style="christmas"] .site-footer-credit .text-primary,
+html[data-style="christmas"] .site-footer-credit svg {
+  color: #c41e3a;
+}
+
+/* Corner gifts sit on the snowbank, above footer chrome */
+html[data-style="christmas"] .xmas-gifts-wrap,
+html[data-style="christmas"] .xmas-tree-wrap {
+  bottom: 8.25rem;
+}
+
+@media (min-width: 768px) {
+  html[data-style="christmas"] .site-footer-bridge {
+    height: 3.25rem;
+  }
+
+  html[data-style="christmas"] .site-footer-snowbank {
+    height: 3rem;
+  }
+
+  html[data-style="christmas"] .site-footer {
+    padding-top: 3rem;
+  }
+
+  html[data-style="christmas"] .xmas-gifts-wrap,
+  html[data-style="christmas"] .xmas-tree-wrap {
+    bottom: 9rem;
+  }
+}
+
+/* Hide snowbank chrome outside christmas (markup is shared) */
+html:not([data-style="christmas"]) .site-footer-snowbank {
+  display: none;
+}

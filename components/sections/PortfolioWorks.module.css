@@ -109,42 +109,6 @@
   margin-bottom: 2.5rem;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 20px;
-  margin-bottom: 1.75rem;
-  background: color-mix(in srgb, var(--primary) 12%, var(--card));
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border-radius: 100px;
-  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
-  box-shadow: 0 4px 20px color-mix(in srgb, var(--primary) 12%, transparent);
-}
-
-.badgeDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), #34d399);
-  animation: works-badge-pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 50%, transparent);
-}
-
-.badgeCount {
-  padding: 2px 8px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--primary-foreground);
-  background: linear-gradient(135deg, var(--primary), #34d399);
-  border-radius: 100px;
-  letter-spacing: 0.04em;
-}
-
 .title {
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 700;
@@ -156,14 +120,6 @@
 
 .titleHighlight {
   color: var(--primary);
-}
-
-.subtitle {
-  font-size: 16px;
-  color: var(--muted-foreground);
-  line-height: 1.7;
-  max-width: 580px;
-  margin: 0 auto;
 }
 
 .filters {
@@ -290,6 +246,7 @@
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 0;
+  pointer-events: none;
 }
 
 .cardGlowOn {
@@ -583,10 +540,19 @@
 
 .cardMeta {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
+}
+
+.cardMetaLeft {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  min-width: 0;
+  flex: 1;
 }
 
 .cardCategory {
@@ -595,6 +561,39 @@
   color: var(--works-accent-from);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.clientBadge {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 3px 9px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.clientBadge:hover,
+.clientBadge:focus-visible {
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  outline: none;
+  cursor: pointer;
 }
 
 .cardLink {
@@ -748,18 +747,6 @@
   }
 }
 
-@keyframes works-badge-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.8;
-  }
-}
-
 @keyframes works-preview-scroll {
   0%,
   20% {
@@ -791,8 +778,7 @@
   .orbRight,
   .orbCenter,
   .mesh,
-  .spark,
-  .badgeDot {
+  .spark {
     animation: none;
   }
 }
@@ -881,30 +867,6 @@
 :global(html[data-style="retro"]) .mesh,
 :global(html[data-style="retro"]) .spark {
   display: none;
-}
-
-:global(html[data-style="retro"]) .badge {
-  background: var(--retro-coin, #f8c800);
-  color: var(--retro-ink, #0a0a0a);
-  border: 3px solid var(--retro-ink, #0a0a0a);
-  border-radius: 4px;
-  box-shadow: 3px 3px 0 var(--retro-ink, #0a0a0a);
-  font-family: var(--font-press-start), monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-:global(html[data-style="retro"]) .badgeCount {
-  background: var(--retro-mario, #e52521);
-  color: #fff8e7;
-  border-radius: 2px;
-  font-family: var(--font-press-start), monospace;
-}
-
-:global(html[data-style="retro"]) .badgeDot {
-  background: var(--retro-pipe, #3d9e00);
-  box-shadow: none;
-  animation: none;
 }
 
 :global(html[data-style="retro"]) .title {
@@ -1001,6 +963,30 @@
   color: var(--retro-sonic, #2563eb);
 }
 
+:global(html[data-style="retro"]) .clientBadge {
+  font-family: var(--font-press-start), monospace;
+  font-size: 7px;
+  line-height: 1.45;
+  border-radius: 2px;
+  border: 2px solid var(--retro-ink, #0a0a0a);
+  background: var(--retro-panel, #fff8e7);
+  color: var(--retro-ink, #0a0a0a);
+  box-shadow: 2px 2px 0 var(--retro-ink, #0a0a0a);
+  text-transform: uppercase;
+  letter-spacing: 0;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+:global(html[data-style="retro"]) .clientBadge:hover,
+:global(html[data-style="retro"]) .clientBadge:focus-visible {
+  background: var(--retro-coin, #f8c800);
+  color: var(--retro-ink, #0a0a0a);
+  border-color: var(--retro-ink, #0a0a0a);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--retro-ink, #0a0a0a);
+}
+
 :global(html[data-style="retro"]) .cardLink {
   border-radius: 2px;
   border: 2px solid var(--retro-ink, #0a0a0a);
@@ -1061,27 +1047,6 @@
 :global(html[data-style="christmas"]) .spark {
   background: var(--xmas-gold, #d4af37);
   box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
-}
-
-:global(html[data-style="christmas"]) .badge {
-  background: rgba(26, 46, 32, 0.92);
-  color: var(--xmas-cream, #f4efe6);
-  border: 1px solid rgba(212, 175, 55, 0.55);
-  border-radius: 999px;
-  box-shadow: 0 0 16px rgba(212, 175, 55, 0.15);
-  font-family: var(--font-christmas), Georgia, serif;
-  letter-spacing: 0.04em;
-}
-
-:global(html[data-style="christmas"]) .badgeCount {
-  background: var(--xmas-red, #c41e3a);
-  color: var(--xmas-cream, #f4efe6);
-  border-radius: 999px;
-}
-
-:global(html[data-style="christmas"]) .badgeDot {
-  background: var(--xmas-gold, #d4af37);
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
 }
 
 :global(html[data-style="christmas"]) .title {
@@ -1194,6 +1159,23 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 0.7rem;
+}
+
+:global(html[data-style="christmas"]) .clientBadge {
+  color: var(--xmas-cream, #f4efe6);
+  background: rgba(26, 46, 32, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+:global(html[data-style="christmas"]) .clientBadge:hover,
+:global(html[data-style="christmas"]) .clientBadge:focus-visible {
+  color: var(--xmas-cream, #f4efe6);
+  border-color: rgba(196, 30, 58, 0.55);
+  background: rgba(196, 30, 58, 0.2);
 }
 
 :global(html[data-style="christmas"]) .cardLink {

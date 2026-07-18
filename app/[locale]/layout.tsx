@@ -56,51 +56,80 @@ export const viewport: Viewport = {
   ],
 };
 
-export const metadata: Metadata = {
-  title: "Alfredo Hurtado | Creative Developer & Frontend Engineer",
-  description:
-    "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
-  applicationName: "Alfredo",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Alfredo",
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  icons: {
-    icon: [
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
-  },
-  keywords: [
-    "Frontend Engineer",
-    "Creative Developer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "Portfolio",
-  ],
-  openGraph: {
-    title: "Alfredo Hurtado | Creative Developer",
-    description:
-      "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.",
-    type: "website",
-    locale: "en_US",
-    url: "https://portfolio.alfredohurtado.com",
-    siteName: "Alfredo Hurtado Portfolio",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Alfredo Hurtado | Creative Developer",
-    description: "Senior Frontend Engineer & Creative Developer.",
-    creator: "@alfredohurtado",
-  },
-};
+const SITE_URL = "https://portfolio.alfredohurtado.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale === "es";
+
+  const title = isEs
+    ? "Soy Alfredo | Desarrollador"
+    : "Alfredo | Developer";
+  const description = isEs
+    ? "Ingeniero Frontend Senior y Creative Developer creando aplicaciones web modernas, accesibles y de alto rendimiento."
+    : "Senior Frontend Engineer and Creative Developer crafting modern, accessible, and high-performance web applications.";
+  const twitterDescription = isEs
+    ? "Ingeniero Frontend Senior y Creative Developer."
+    : "Senior Frontend Engineer & Creative Developer.";
+
+  return {
+    title,
+    description,
+    applicationName: isEs ? "Soy Alfredo" : "Alfredo",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: isEs ? "Soy Alfredo" : "Alfredo",
+    },
+    formatDetection: {
+      telephone: false,
+    },
+    icons: {
+      icon: [
+        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+    },
+    keywords: isEs
+      ? [
+          "Ingeniero Frontend",
+          "Creative Developer",
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Portafolio",
+        ]
+      : [
+          "Frontend Engineer",
+          "Creative Developer",
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Portfolio",
+        ],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: isEs ? "es_ES" : "en_US",
+      url: SITE_URL,
+      siteName: isEs ? "Soy Alfredo" : "Alfredo",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: twitterDescription,
+      creator: "@alfredohurtado",
+    },
+  };
+}
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

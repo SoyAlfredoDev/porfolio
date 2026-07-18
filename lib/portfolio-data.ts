@@ -1,5 +1,14 @@
 export type ProjectCategory = "web" | "landing" | "software" | "ai";
 
+/** Optional client attribution when work was built for an external company. */
+export type ProjectClient = {
+  name: string;
+  url: string;
+  /** Override default i18n “Creado para {name}” / “Built for {name}” */
+  labelEs?: string;
+  labelEn?: string;
+};
+
 export type PortfolioProject = {
   id: string;
   name: string;
@@ -7,6 +16,7 @@ export type PortfolioProject = {
   description: { es: string; en: string };
   url?: string;
   tags: string[];
+  client?: ProjectClient;
 };
 
 export const PROJECT_CATEGORIES: ProjectCategory[] = [
@@ -42,6 +52,24 @@ export const CATEGORY_ACCENTS: Record<
   },
 };
 
+/** Shared SmartPro attribution — reuse on every project built for them. */
+export const SMARTPRO_CLIENT: ProjectClient = {
+  name: "SmartPro",
+  url: "https://smartpro.cl",
+  labelEs: "Creado para SmartPro",
+  labelEn: "Built for SmartPro",
+};
+
+export function getClientLabel(
+  client: ProjectClient,
+  locale: "es" | "en",
+  fallbackTemplate: string,
+): string {
+  const custom = locale === "es" ? client.labelEs : client.labelEn;
+  if (custom) return custom;
+  return fallbackTemplate.replace("{name}", client.name);
+}
+
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
     id: "isapres-premium",
@@ -53,6 +81,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://isaprespremium.cl/",
     tags: ["WordPress", "Landing Page", "Responsive"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "desde-tu-7",
@@ -64,6 +93,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://desdetu7.cl/",
     tags: ["Next.js", "Vercel", "Isapres"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "estudio-lyv",
@@ -75,6 +105,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://www.estudiolyv.cl/",
     tags: ["Next.js", "Vercel", "UI/UX"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "turismo-dabar",
@@ -86,6 +117,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://turismodabar.cl/",
     tags: ["Next.js", "Vercel", "Turismo"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "hotel-casa-paraiso",
@@ -97,6 +129,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://hotelcasaparaiso.cl/",
     tags: ["Next.js", "Vercel", "Reservas"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "cotizalo-antes",
@@ -108,6 +141,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://cotizaloantes.cl/",
     tags: ["Página", "Sistema", "Isapres"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "cotizador-premium",
@@ -119,6 +153,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     url: "https://cotizadorpremium.cl/",
     tags: ["Next.js", "Vercel", "Isapres"],
+    client: SMARTPRO_CLIENT,
   },
   {
     id: "ai-assist",

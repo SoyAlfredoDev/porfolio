@@ -1,12 +1,10 @@
 {
   "portfolio": {
-    "badge": "Web Portfolio",
-    "count": "{count} projects",
     "title": "Projects I've",
     "titleHighlight": "built",
-    "subtitle": "A selection of real sites and systems. Filter by category and visit the live work.",
     "viewSite": "View site",
     "goToProject": "Go to project {n}",
+    "clientBuiltFor": "Built for {name}",
     "filters": {
       "all": "All",
       "web": "Website",

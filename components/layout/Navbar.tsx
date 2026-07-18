@@ -69,12 +69,8 @@ export function Navbar() {
           data-retro-label
           onClick={() => setIsOpen(false)}
         >
-          <span className="md:hidden">
-            Alfredo<span className="text-primary">.</span>
-          </span>
-          <span className="hidden md:inline">
-            Soy Alfredo<span className="text-primary">.</span>
-          </span>
+          {t("nav.brand")}
+          <span className="text-primary">.</span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-6 lg:space-x-8">

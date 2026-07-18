@@ -2,6 +2,7 @@
 @import "./styles/modern.css";
 @import "./styles/retro.css";
 @import "./styles/christmas.css";
+@import "./styles/footer.css";
 @import "./styles/mobile.css";
 
 /*
@@ -95,6 +96,12 @@ body {
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+}
+
+/* Page content + footer sit above fixed atmospheres (z ~3–15) */
+main {
+  position: relative;
+  z-index: 20;
 }
 
 @layer utilities {

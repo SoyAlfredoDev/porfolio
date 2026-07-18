@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useT } from "@/context/LanguageContext";
 import {
   CATEGORY_ACCENTS,
+  getClientLabel,
   PORTFOLIO_PROJECTS,
   PROJECT_CATEGORIES,
   type PortfolioProject,
@@ -224,6 +225,13 @@ function PageCard({
   const accent = CATEGORY_ACCENTS[page.category];
   const description =
     page.description[locale] ?? page.description.es ?? page.description.en;
+  const clientLabel = page.client
+    ? getClientLabel(
+        page.client,
+        locale === "en" ? "en" : "es",
+        t("portfolio.clientBuiltFor"),
+      )
+    : null;
 
   return (
     <motion.article
@@ -261,9 +269,23 @@ function PageCard({
 
         <div className={styles.cardBody}>
           <div className={styles.cardMeta}>
-            <span className={styles.cardCategory}>
-              {t(`portfolio.filters.${page.category}`)}
-            </span>
+            <div className={styles.cardMetaLeft}>
+              <span className={styles.cardCategory}>
+                {t(`portfolio.filters.${page.category}`)}
+              </span>
+              {page.client && clientLabel && (
+                <a
+                  href={page.client.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.clientBadge}
+                  title={page.client.url}
+                  aria-label={`${clientLabel} — ${page.client.name}`}
+                >
+                  {clientLabel}
+                </a>
+              )}
+            </div>
             {hasUrl && (
               <a
                 href={page.url}
@@ -358,11 +380,6 @@ export function PortfolioWorks() {
     setActiveIndex(index);
   };
 
-  const countLabel = t("portfolio.count").replace(
-    "{count}",
-    String(PORTFOLIO_PROJECTS.length),
-  );
-
   return (
     <section id="portfolio-works" className={styles.works}>
       <div className={cn(styles.orb, styles.orbLeft)} />
@@ -372,18 +389,6 @@ export function PortfolioWorks() {
 
       <div className={styles.container}>
         <header className={styles.header}>
-          <motion.div
-            className={styles.badge}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className={styles.badgeDot} />
-            <span>{t("portfolio.badge")}</span>
-            <span className={styles.badgeCount}>{countLabel}</span>
-          </motion.div>
-
           <motion.h1
             className={styles.title}
             initial={{ opacity: 0, y: 16 }}
@@ -396,16 +401,6 @@ export function PortfolioWorks() {
               {t("portfolio.titleHighlight")}
             </span>
           </motion.h1>
-
-          <motion.p
-            className={styles.subtitle}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-          >
-            {t("portfolio.subtitle")}
-          </motion.p>
         </header>
 
         <motion.div

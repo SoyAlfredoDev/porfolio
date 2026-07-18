@@ -1,12 +1,10 @@
 {
   "portfolio": {
-    "badge": "Portafolio Web",
-    "count": "{count} proyectos",
     "title": "Proyectos que he",
     "titleHighlight": "creado",
-    "subtitle": "Una selección de sitios y sistemas reales. Explora por categoría y visita el trabajo en vivo.",
     "viewSite": "Ver sitio",
     "goToProject": "Ir al proyecto {n}",
+    "clientBuiltFor": "Creado para {name}",
     "filters": {
       "all": "Todas",
       "web": "Página web",

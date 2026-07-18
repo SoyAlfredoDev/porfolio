@@ -21,12 +21,14 @@ body {
 }
 
 .lang-switcher {
-  bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem)) !important;
+  /* Sit above footer dock / home indicator; avoid covering footer links */
+  bottom: max(1.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem)) !important;
   right: max(1rem, calc(env(safe-area-inset-right, 0px) + 0.5rem)) !important;
 }
 
-.site-footer {
-  padding-bottom: max(2rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem));
+.site-footer-shell {
+  /* Ensure shell wins over mobile atmosphere z bumps */
+  z-index: 50;
 }
 
 /* Touch targets */
@@ -101,21 +103,30 @@ body {
     transform: translate(2px, 2px) scale(1);
   }
 
-  /* Atmosphere: keep gutters clear of copy on small screens */
+  /* Atmosphere: keep gutters clear of copy on small screens.
+     Christmas snow stays above body wash (transparent main) — don't bury it. */
   .retro-atmosphere,
-  .xmas-decor,
-  .xmas-atmosphere,
   .modern-atmosphere {
     z-index: 2 !important;
   }
 
+  .xmas-decor {
+    z-index: 15 !important;
+  }
+
+  html[data-style="christmas"] .xmas-atmosphere {
+    z-index: 18 !important;
+  }
+
   .container,
-  .site-footer,
   .word-game,
-  main > section,
-  main > div {
+  main > section {
     position: relative;
     z-index: 30;
+  }
+
+  .site-footer-shell {
+    z-index: 50 !important;
   }
 
   .site-nav {
@@ -126,7 +137,7 @@ body {
     z-index: 90 !important;
   }
 
-  /* Hide densest side props on phone */
+  /* Hide densest side props on phone — keep a soft garland */
   .retro-pipe-left,
   .retro-pipe-right,
   .retro-blocks-left,
@@ -139,8 +150,20 @@ body {
   }
 
   .xmas-garland-wrap {
-    opacity: 0.45;
+    opacity: 0.55;
     height: 1.75rem;
+  }
+
+  html[data-style="christmas"] .site-footer-bridge {
+    height: 2.25rem;
+  }
+
+  html[data-style="christmas"] .site-footer-snowbank {
+    height: 2rem;
+  }
+
+  html[data-style="christmas"] .site-footer {
+    padding-top: 2.25rem;
   }
 
   .retro-world-floor {
@@ -149,11 +172,11 @@ body {
   }
 
   html[data-style="retro"] main {
-    padding-bottom: 4.5rem !important;
+    padding-bottom: 0 !important;
   }
 
   html[data-style="christmas"] main {
-    padding-bottom: 4rem !important;
+    padding-bottom: 0 !important;
   }
 
   /* Retro pixel type: smaller + readable line-height */

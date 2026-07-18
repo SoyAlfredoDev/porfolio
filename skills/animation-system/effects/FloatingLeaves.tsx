@@ -27,16 +27,17 @@ export function FloatingLeaves({
 
   const flakes = useMemo(() => {
     if (!config.enabled) return [];
+    // Light views still need a noticeable fall; mobile floor via useParticleSystem (~12+)
     const count =
       intensity === "light"
-        ? Math.max(10, Math.round(config.count * 0.45))
+        ? Math.max(18, Math.round(config.count * 0.65))
         : config.count;
     return Array.from({ length: count }, () => ({
       x: Math.random(),
       y: Math.random(),
-      r: 1 + Math.random() * 2.2,
-      speed: 0.15 + Math.random() * 0.35,
-      drift: (Math.random() - 0.5) * 0.25,
+      r: 1.2 + Math.random() * 2.8,
+      speed: 0.12 + Math.random() * 0.38,
+      drift: (Math.random() - 0.5) * 0.28,
     }));
   }, [config.count, config.enabled, intensity]);
 
@@ -65,16 +66,22 @@ export function FloatingLeaves({
       const { width, height } = wrap.getBoundingClientRect();
       if (inView) {
         ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle =
-          mode === "snow"
-            ? "rgba(244,239,230,0.7)"
-            : "rgba(1,198,118,0.35)";
+        const isSnow = mode === "snow";
         for (const f of local) {
           f.y += f.speed * 0.004;
           f.x += f.drift * 0.004;
-          if (f.y > 1) f.y = -0.05;
+          // Sink into footer snowbank (bottom ~12% of viewport)
+          if (f.y > 0.92) {
+            f.y = -0.05;
+            f.x = Math.random();
+          }
           if (f.x < 0) f.x = 1;
           if (f.x > 1) f.x = 0;
+          const fade =
+            isSnow && f.y > 0.78 ? Math.max(0.15, 1 - (f.y - 0.78) / 0.14) : 1;
+          ctx.fillStyle = isSnow
+            ? `rgba(244,239,230,${0.88 * fade})`
+            : "rgba(1,198,118,0.35)";
           ctx.beginPath();
           ctx.arc(f.x * width, f.y * height, f.r, 0, Math.PI * 2);
           ctx.fill();

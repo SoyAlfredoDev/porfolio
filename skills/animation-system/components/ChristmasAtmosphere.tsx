@@ -64,7 +64,7 @@ export function ChristmasAtmosphere({ view, density = "light" }: Props) {
 
   return (
     <div
-      className="xmas-atmosphere fixed inset-0 z-[4] pointer-events-none overflow-hidden"
+      className="xmas-atmosphere fixed inset-0 z-[18] pointer-events-none overflow-hidden"
       aria-hidden
     >
       {effects.has("snow") && (

@@ -59,18 +59,24 @@ html[data-style="christmas"][data-theme="dark"] {
   --ring: #d4af37;
 }
 
-/* Keep forms/CTAs clear of fixed tree/gifts */
+/* Keep forms/CTAs clear of fixed tree/gifts — footer shell owns bottom spacing.
+   Transparent main so fixed snow/decor (lower z) show through; copy stays above via z-30. */
 html[data-style="christmas"] main {
-  padding-bottom: 5.5rem !important;
+  padding-bottom: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-style="christmas"] .xmas-atmosphere {
+  z-index: 18 !important;
 }
 
 html[data-style="christmas"] .container,
-html[data-style="christmas"] .site-footer,
 html[data-style="christmas"] .word-game,
 html[data-style="christmas"] main > section,
-html[data-style="christmas"] main > div {
+html[data-style="christmas"] main > .pt-24 {
   position: relative;
-  z-index: 40;
+  z-index: 30;
 }
 
 /* Soft night gradient + subtle star dust (no clipart) */
@@ -230,20 +236,7 @@ html[data-style="christmas"] .text-primary {
   color: #c41e3a !important;
 }
 
-html[data-style="christmas"] .site-footer {
-  background: linear-gradient(180deg, #0f1f14, #0a1510) !important;
-  border-top: 1px solid rgba(212, 175, 55, 0.4) !important;
-  color: #f4efe6 !important;
-}
-
-html[data-style="christmas"] .site-footer a,
-html[data-style="christmas"] .site-footer p {
-  color: #c5d4c8 !important;
-}
-
-html[data-style="christmas"] .site-footer a:hover {
-  color: #d4af37 !important;
-}
+/* Footer — see footer.css */
 
 /* Style switcher */
 html[data-style="christmas"] .style-switcher {

@@ -69,7 +69,7 @@ export function RetroAtmosphere({ view, density = "light" }: Props) {
 
   return (
     <div
-      className="retro-atmosphere fixed inset-0 z-[25] pointer-events-none overflow-hidden"
+      className="retro-atmosphere fixed inset-0 z-[15] pointer-events-none overflow-hidden"
       aria-hidden
     >
       {showParticles && (
