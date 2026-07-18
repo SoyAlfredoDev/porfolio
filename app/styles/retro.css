@@ -1,0 +1,790 @@
+/* ── Retro arcade skin (Mario sky + Sonic Green Hill vibe) ── */
+/* Applied when <html data-style="retro"> */
+
+html[data-style="retro"] {
+  --retro-sky: #5c94fc;
+  --retro-sonic: #2563eb;
+  --retro-mario: #e52521;
+  --retro-pipe: #3d9e00;
+  --retro-coin: #f8c800;
+  --retro-brick: #c84c0c;
+  --retro-ground: #6b3f14;
+  --retro-ink: #0a0a0a;
+  --retro-panel: #fff8e7;
+  --retro-arcade: #0b1020;
+
+  /* Literal values so Tailwind bg-* / text-* resolve immediately */
+  --background: #5c94fc;
+  --foreground: #0a0a0a;
+  --card: #fff8e7;
+  --card-foreground: #0a0a0a;
+  --primary: #e52521;
+  --primary-foreground: #fff8e7;
+  --secondary: #fff8e7;
+  --secondary-foreground: #0a0a0a;
+  --muted: #e8d9b8;
+  --muted-foreground: #3d2a14;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --border: #0a0a0a;
+  --input: #fff8e7;
+  --ring: #f8c800;
+  --radius: 4px;
+
+  --retro-shadow: 4px 4px 0 #0a0a0a;
+  --retro-shadow-sm: 2px 2px 0 #0a0a0a;
+  --font-display: var(--font-press-start), var(--font-pixel), ui-monospace, monospace;
+}
+
+/* Dark + retro: must beat modern .dark */
+html[data-style="retro"].dark,
+html.dark[data-style="retro"],
+html[data-style="retro"][data-theme="dark"] {
+  --background: #0b1020;
+  --foreground: #fff8e7;
+  --card: #1a2240;
+  --card-foreground: #fff8e7;
+  --primary: #e52521;
+  --primary-foreground: #fff8e7;
+  --secondary: #162035;
+  --secondary-foreground: #fff8e7;
+  --muted: #243056;
+  --muted-foreground: #c8d0e0;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --border: #f8c800;
+  --input: #162035;
+  --ring: #f8c800;
+}
+
+/* Pixel sky / scanline atmosphere */
+html[data-style="retro"] body {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 72%,
+      color-mix(in srgb, var(--retro-pipe) 55%, transparent) 72%,
+      color-mix(in srgb, var(--retro-pipe) 55%, transparent) 78%,
+      var(--retro-ground) 78%,
+      var(--retro-ground) 100%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.04) 3px,
+      rgba(0, 0, 0, 0.04) 4px
+    );
+  background-attachment: fixed;
+  image-rendering: pixelated;
+}
+
+html[data-style="retro"].dark body,
+html.dark[data-style="retro"] body {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(248, 200, 0, 0.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 40%, rgba(92, 148, 252, 0.12) 0 1px, transparent 2px),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.03) 3px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
+}
+
+/* Display type for headings / nav / badges */
+html[data-style="retro"] h1,
+html[data-style="retro"] h2,
+html[data-style="retro"] h3,
+html[data-style="retro"] .font-display,
+html[data-style="retro"] nav a,
+html[data-style="retro"] [data-retro-label] {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+html[data-style="retro"] h1 {
+  font-size: clamp(1.35rem, 4vw, 2.4rem) !important;
+  text-shadow: 3px 3px 0 rgba(10, 10, 10, 0.25);
+}
+
+html[data-style="retro"] h2 {
+  font-size: clamp(1.1rem, 3vw, 1.75rem) !important;
+}
+
+html[data-style="retro"] h3 {
+  font-size: clamp(0.85rem, 2vw, 1.1rem) !important;
+}
+
+/* Kill glassmorphism */
+html[data-style="retro"] .glass {
+  background: var(--retro-panel) !important;
+  backdrop-filter: none !important;
+  border: 3px solid var(--retro-ink) !important;
+  box-shadow: var(--retro-shadow);
+}
+
+html.dark[data-style="retro"] .glass,
+html[data-style="retro"].dark .glass {
+  background: var(--card) !important;
+  border-color: var(--retro-coin) !important;
+}
+
+/* Utilities */
+.retro-panel {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 3px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--retro-shadow, 4px 4px 0 #0a0a0a);
+}
+
+.retro-border {
+  border: 3px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+}
+
+.retro-shadow {
+  box-shadow: var(--retro-shadow, 4px 4px 0 #0a0a0a) !important;
+}
+
+.retro-btn {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  border: 3px solid var(--retro-ink, #0a0a0a) !important;
+  border-radius: 4px !important;
+  box-shadow: 4px 4px 0 var(--retro-ink, #0a0a0a) !important;
+  transition:
+    transform 0.08s steps(2),
+    box-shadow 0.08s steps(2) !important;
+}
+
+html[data-style="retro"] .ui-btn {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  border: 3px solid var(--retro-ink) !important;
+  border-radius: 4px !important;
+  box-shadow: 4px 4px 0 var(--retro-ink) !important;
+  transition:
+    transform 0.08s steps(2),
+    box-shadow 0.08s steps(2),
+    background-color 0.12s !important;
+}
+
+html[data-style="retro"] .ui-btn:hover:not(:disabled) {
+  transform: translate(-3px, -4px);
+  box-shadow: 7px 8px 0 var(--retro-ink) !important;
+}
+
+html[data-style="retro"] .ui-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--retro-ink) !important;
+}
+
+html[data-style="retro"] .ui-btn-primary {
+  background: var(--retro-mario) !important;
+  color: #fff8e7 !important;
+}
+
+html[data-style="retro"] .ui-btn-outline,
+html[data-style="retro"] .ui-btn-secondary {
+  background: var(--retro-sonic) !important;
+  color: #fff !important;
+}
+
+html[data-style="retro"] .ui-btn-ghost {
+  background: var(--retro-coin) !important;
+  color: var(--retro-ink) !important;
+}
+
+html[data-style="retro"] .ui-card {
+  background: var(--card) !important;
+  color: var(--card-foreground) !important;
+  border: 3px solid var(--retro-ink) !important;
+  border-radius: 4px !important;
+  box-shadow: 4px 4px 0 var(--retro-ink) !important;
+}
+
+/* Forms */
+html[data-style="retro"] input,
+html[data-style="retro"] textarea,
+html[data-style="retro"] select {
+  background: var(--retro-panel) !important;
+  color: var(--retro-ink) !important;
+  border: 3px solid var(--retro-ink) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 2px 2px 0 rgba(10, 10, 10, 0.12);
+  font-family: var(--font-sans);
+}
+
+html.dark[data-style="retro"] input,
+html.dark[data-style="retro"] textarea,
+html[data-style="retro"].dark input,
+html[data-style="retro"].dark textarea {
+  background: #162035 !important;
+  color: #fff8e7 !important;
+  border-color: var(--retro-coin) !important;
+}
+
+html[data-style="retro"] input:focus,
+html[data-style="retro"] textarea:focus {
+  outline: none;
+  box-shadow:
+    inset 2px 2px 0 rgba(10, 10, 10, 0.12),
+    0 0 0 3px var(--retro-coin);
+}
+
+/* Navbar */
+html[data-style="retro"] nav.site-nav {
+  background: var(--retro-panel) !important;
+  border-bottom: 4px solid var(--retro-ink) !important;
+  box-shadow: 0 4px 0 rgba(10, 10, 10, 0.2);
+  backdrop-filter: none !important;
+}
+
+html.dark[data-style="retro"] nav.site-nav,
+html[data-style="retro"].dark nav.site-nav {
+  background: #1a2240 !important;
+  border-bottom-color: var(--retro-coin) !important;
+}
+
+html[data-style="retro"] nav.site-nav a {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+html[data-style="retro"] .site-brand {
+  font-family: var(--font-display);
+  font-size: 0.7rem !important;
+  text-transform: uppercase;
+}
+
+/* Footer */
+html[data-style="retro"] .site-footer {
+  position: relative;
+  z-index: 20;
+  background: var(--retro-ground) !important;
+  color: #fff8e7 !important;
+  border-top: 4px solid var(--retro-ink) !important;
+}
+
+html[data-style="retro"] .site-footer a,
+html[data-style="retro"] .site-footer p {
+  color: #fff8e7 !important;
+}
+
+html[data-style="retro"] .site-footer a:hover {
+  color: var(--retro-coin) !important;
+}
+
+/* Style switcher */
+html[data-style="retro"] .style-switcher {
+  border-radius: 4px !important;
+  border: 3px solid #0a0a0a !important;
+  background: #fff8e7 !important;
+  backdrop-filter: none !important;
+  box-shadow: 2px 2px 0 #0a0a0a;
+  padding: 3px !important;
+}
+
+html[data-style="retro"] .style-switcher button {
+  border-radius: 2px !important;
+  font-family: var(--font-press-start), monospace;
+  font-size: 0.5rem !important;
+}
+
+html[data-style="retro"] .style-switcher button[aria-pressed="true"] {
+  background: #e52521 !important;
+  color: #fff8e7 !important;
+  box-shadow: 2px 2px 0 #0a0a0a;
+  outline: 2px solid #f8c800;
+  outline-offset: 1px;
+}
+
+/* Lobby cards */
+html[data-style="retro"] .lobby-card {
+  background: var(--retro-panel) !important;
+  border: 3px solid var(--retro-ink) !important;
+  border-radius: 4px !important;
+  box-shadow: 4px 4px 0 var(--retro-ink) !important;
+  transition:
+    transform 0.1s steps(2),
+    box-shadow 0.1s steps(2) !important;
+}
+
+html[data-style="retro"] .lobby-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--retro-ink) !important;
+  border-color: var(--retro-ink) !important;
+}
+
+/* Coin shine instead of soft glow */
+html[data-style="retro"] .hover-glow {
+  box-shadow: none !important;
+}
+
+html[data-style="retro"] .hover-glow:hover {
+  box-shadow: 4px 4px 0 var(--retro-ink) !important;
+  outline: 2px solid var(--retro-coin);
+  outline-offset: 2px;
+}
+
+/* Language switcher floating */
+html[data-style="retro"] .lang-switcher {
+  border: 3px solid var(--retro-ink) !important;
+  border-radius: 4px !important;
+  background: var(--retro-panel) !important;
+  backdrop-filter: none !important;
+  box-shadow: 3px 3px 0 var(--retro-ink);
+}
+
+/* Badge pills → rectangles */
+html[data-style="retro"] .retro-badge,
+html[data-style="retro"] [data-retro-badge] {
+  border-radius: 4px !important;
+  border: 2px solid var(--retro-ink) !important;
+  background: var(--retro-coin) !important;
+  color: var(--retro-ink) !important;
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  box-shadow: 2px 2px 0 var(--retro-ink);
+  text-transform: uppercase;
+}
+
+/* Word game panel */
+html[data-style="retro"] .word-game .lobby-card {
+  background: var(--retro-panel);
+}
+
+html.dark[data-style="retro"] .word-game .lobby-card,
+html[data-style="retro"].dark .word-game .lobby-card {
+  background: #1a2240;
+  border-color: var(--retro-coin);
+  box-shadow: 4px 4px 0 var(--retro-coin);
+}
+
+/* Selection */
+html[data-style="retro"] ::selection {
+  background: var(--retro-coin);
+  color: var(--retro-ink);
+}
+
+/* Let body sky / ground show through; atmosphere sits above page wash */
+html[data-style="retro"] main {
+  background-color: transparent !important;
+  /* Room for fixed arcade floor / lang switcher — content never sits under ground */
+  padding-bottom: 6.5rem !important;
+}
+
+/* Hero socials sit near the dirt strip — keep them cream for contrast */
+html[data-style="retro"] main > section:first-of-type {
+  padding-bottom: 4.5rem;
+}
+
+html[data-style="retro"] main > section:first-of-type a.text-muted-foreground,
+html[data-style="retro"] main > section:first-of-type .text-muted-foreground {
+  color: #fff8e7 !important;
+}
+
+/* Content above world decor; decor above bare section backgrounds */
+html[data-style="retro"] .container,
+html[data-style="retro"] .site-footer,
+html[data-style="retro"] .word-game,
+html[data-style="retro"] .works {
+  position: relative;
+  z-index: 40;
+}
+
+html[data-style="retro"] nav.site-nav {
+  z-index: 80 !important;
+}
+
+/* ── Live arcade world (RetroWorldDecor) ── */
+.retro-atmosphere {
+  /* Below content (40) and nav (80); above bare page wash */
+  z-index: 15 !important;
+}
+
+.retro-world {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.retro-clouds {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  height: 80px;
+}
+
+.retro-clouds-far {
+  top: 4.75rem;
+  opacity: 1;
+}
+
+.retro-clouds-near {
+  top: 8.75rem;
+  opacity: 1;
+}
+
+.retro-cloud-track {
+  display: flex;
+  width: max-content;
+  animation: retro-cloud-drift 48s linear infinite;
+}
+
+.retro-cloud-track-fast {
+  animation-duration: 32s;
+}
+
+.retro-cloud-set {
+  display: flex;
+  gap: 4rem;
+  padding-right: 4rem;
+}
+
+.retro-cloud {
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.retro-cloud-sm {
+  transform: scale(0.7);
+  opacity: 0.9;
+}
+
+.retro-world-light .retro-clouds-far {
+  top: 5rem;
+  opacity: 0.55;
+}
+
+.retro-world-light .retro-cloud-track {
+  animation-duration: 60s;
+}
+
+.retro-pickups {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.retro-coin,
+.retro-ring,
+.retro-star-icon,
+.retro-shroom {
+  position: absolute;
+  image-rendering: pixelated;
+  filter: drop-shadow(3px 3px 0 #0a0a0a);
+}
+
+/* Side gutters only — never over the ~720px content column */
+.retro-coin-a {
+  top: 18%;
+  right: 1.25rem;
+  animation: retro-coin-spin 2.4s steps(6) infinite;
+}
+
+.retro-coin-b {
+  top: 42%;
+  left: 1rem;
+  animation: retro-coin-spin 2.8s steps(6) infinite;
+  animation-delay: 0.4s;
+}
+
+.retro-coin-mini {
+  position: absolute;
+  bottom: 5.5rem;
+  right: 0.75rem;
+  opacity: 0.55;
+  animation: retro-coin-spin 2.6s steps(6) infinite;
+}
+
+.retro-ring-a {
+  top: 32%;
+  right: 1.5rem;
+  animation: retro-bob 2.2s ease-in-out infinite;
+}
+
+.retro-ring-b {
+  top: 58%;
+  left: 1.25rem;
+  animation: retro-bob 2.6s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.retro-star-icon {
+  top: 14%;
+  left: 1.5rem;
+  animation: retro-twinkle 1.8s steps(2) infinite;
+}
+
+.retro-shroom {
+  bottom: 8.5rem;
+  left: 4.5rem;
+  animation: retro-bob 3s ease-in-out infinite;
+}
+
+.retro-blocks-left {
+  position: absolute;
+  left: 0.75rem;
+  top: 42%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  filter: drop-shadow(3px 3px 0 #0a0a0a);
+}
+
+.retro-pipe-left {
+  position: absolute;
+  left: 0.35rem;
+  bottom: 5.5rem;
+  z-index: 2;
+  filter: drop-shadow(4px 4px 0 #0a0a0a);
+  animation: retro-bob 3.4s ease-in-out infinite;
+}
+
+.retro-pipe-right {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 5.5rem;
+  z-index: 2;
+  filter: drop-shadow(4px 4px 0 #0a0a0a);
+  animation: retro-bob 3.8s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.retro-bob {
+  animation: retro-bob 2.8s ease-in-out infinite;
+}
+
+.retro-bob-delay {
+  animation-delay: 0.45s;
+}
+
+.retro-hud {
+  position: absolute;
+  top: 5.75rem;
+  right: 1rem;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.35rem 0.5rem;
+  background: #fff8e7;
+  border: 3px solid #0a0a0a;
+  box-shadow: 3px 3px 0 #0a0a0a;
+  font-family: var(--font-press-start), monospace;
+  font-size: 0.45rem;
+  color: #0a0a0a;
+  line-height: 1.5;
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.retro-hud-val {
+  color: #e52521;
+}
+
+html.dark[data-style="retro"] .retro-hud,
+html[data-style="retro"].dark .retro-hud {
+  background: #1a2240;
+  color: #fff8e7;
+  border-color: #f8c800;
+  box-shadow: 3px 3px 0 #f8c800;
+}
+
+.retro-accent-right {
+  position: absolute;
+  inset: 0;
+}
+
+.retro-world-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5.5rem;
+  z-index: 1;
+  /* Soft fade so scrolling content isn't hard-clipped by the dirt strip */
+  mask-image: linear-gradient(to top, #000 55%, transparent);
+}
+
+.retro-hills {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.75rem;
+  width: 100%;
+  height: 72px;
+}
+
+.retro-ground-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3rem;
+}
+
+.retro-ground-grass {
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #3d9e00 0 12px,
+    #2d7a00 12px 24px
+  );
+  border-top: 3px solid #0a0a0a;
+  border-bottom: 2px solid #0a0a0a;
+}
+
+.retro-ground-dirt {
+  display: flex;
+  height: calc(100% - 10px);
+  overflow: hidden;
+  background: #6b3f14;
+  border-bottom: 3px solid #0a0a0a;
+}
+
+.retro-ground-tile {
+  flex: 0 0 48px;
+  height: 100%;
+  border-right: 2px solid rgba(10, 10, 10, 0.35);
+  background: linear-gradient(
+    180deg,
+    #7a4a18 0%,
+    #6b3f14 40%,
+    #4a2c0e 100%
+  );
+}
+
+.retro-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.035) 3px,
+    rgba(0, 0, 0, 0.035) 4px
+  );
+  opacity: 0.65;
+  z-index: 3;
+}
+
+.retro-world-light .retro-world-floor {
+  height: 3.25rem;
+  opacity: 0.75;
+}
+
+.retro-world-light .retro-scanlines {
+  opacity: 0.35;
+}
+
+@keyframes retro-cloud-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes retro-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes retro-coin-spin {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.15);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes retro-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+}
+
+/* Keep side props from crowding small screens */
+@media (max-width: 640px) {
+  .retro-pipe-left,
+  .retro-pipe-right,
+  .retro-blocks-left {
+    opacity: 0.45;
+    transform: scale(0.75);
+    transform-origin: bottom left;
+  }
+
+  .retro-pipe-right {
+    transform-origin: bottom right;
+  }
+
+  .retro-hud {
+    font-size: 0.4rem;
+    opacity: 0.7;
+  }
+
+  .retro-shroom,
+  .retro-star-icon {
+    display: none;
+  }
+
+  .retro-world-full .retro-coin-b,
+  .retro-world-full .retro-ring-b,
+  .retro-hud {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="retro"] .ui-btn,
+  html[data-style="retro"] .lobby-card {
+    transition: none !important;
+  }
+
+  .retro-cloud-track,
+  .retro-coin,
+  .retro-ring,
+  .retro-star-icon,
+  .retro-shroom,
+  .retro-bob,
+  .retro-pipe-left,
+  .retro-pipe-right,
+  .retro-coin-mini {
+    animation: none !important;
+  }
+
+  .retro-static .retro-cloud-track,
+  .retro-static .retro-coin,
+  .retro-static .retro-ring,
+  .retro-static .retro-bob {
+    animation: none !important;
+  }
+}

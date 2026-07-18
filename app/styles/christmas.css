@@ -1,0 +1,559 @@
+/* ── Christmas premium skin ── */
+/* Applied when <html data-style="christmas"> */
+
+html[data-style="christmas"] {
+  --xmas-red: #c41e3a;
+  --xmas-green: #1b4332;
+  --xmas-accent: #2e8b57;
+  --xmas-gold: #d4af37;
+  --xmas-cream: #f4efe6;
+  --xmas-night: #0f1f14;
+  --xmas-card: #1a2e20;
+
+  --background: #0f1f14;
+  --foreground: #f4efe6;
+  --card: #1a2e20;
+  --card-foreground: #f4efe6;
+  --primary: #c41e3a;
+  --primary-foreground: #f4efe6;
+  --secondary: #1a2e20;
+  --secondary-foreground: #f4efe6;
+  --muted: #243528;
+  --muted-foreground: #c5d4c8;
+  --accent: #2e8b57;
+  --accent-foreground: #ffffff;
+  --border: #d4af37;
+  --input: #1a2e20;
+  --ring: #d4af37;
+  --radius: 0.5rem;
+
+  --xmas-glow: 0 0 24px rgba(212, 175, 55, 0.35);
+  --font-display: var(--font-christmas), Georgia, "Times New Roman", serif;
+}
+
+/* Light christmas (rare): soft cream room with evergreen accents */
+html[data-style="christmas"]:not(.dark):not([data-theme="dark"]) {
+  /* Prefer festive night as default brand; keep tokens night-first.
+     If user forces light class off dark, still keep rich festive palette. */
+  --background: #0f1f14;
+  --foreground: #f4efe6;
+}
+
+html[data-style="christmas"].dark,
+html.dark[data-style="christmas"],
+html[data-style="christmas"][data-theme="dark"] {
+  --background: #0a1510;
+  --foreground: #f4efe6;
+  --card: #15261c;
+  --card-foreground: #f4efe6;
+  --primary: #c41e3a;
+  --primary-foreground: #f4efe6;
+  --secondary: #15261c;
+  --secondary-foreground: #f4efe6;
+  --muted: #1e3226;
+  --muted-foreground: #b8c9bc;
+  --accent: #2e8b57;
+  --accent-foreground: #ffffff;
+  --border: #d4af37;
+  --input: #15261c;
+  --ring: #d4af37;
+}
+
+/* Keep forms/CTAs clear of fixed tree/gifts */
+html[data-style="christmas"] main {
+  padding-bottom: 5.5rem !important;
+}
+
+html[data-style="christmas"] .container,
+html[data-style="christmas"] .site-footer,
+html[data-style="christmas"] .word-game,
+html[data-style="christmas"] main > section,
+html[data-style="christmas"] main > div {
+  position: relative;
+  z-index: 40;
+}
+
+/* Soft night gradient + subtle star dust (no clipart) */
+html[data-style="christmas"] body {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(
+      ellipse 120% 80% at 50% -20%,
+      rgba(196, 30, 58, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 50% at 80% 100%,
+      rgba(46, 139, 87, 0.2),
+      transparent 50%
+    ),
+    radial-gradient(1px 1px at 12% 18%, rgba(244, 239, 230, 0.55), transparent),
+    radial-gradient(1px 1px at 78% 32%, rgba(212, 175, 55, 0.45), transparent),
+    radial-gradient(1px 1px at 42% 64%, rgba(244, 239, 230, 0.35), transparent),
+    radial-gradient(1px 1px at 88% 72%, rgba(244, 239, 230, 0.4), transparent);
+  background-attachment: fixed;
+}
+
+/* Elegant display type — not pixel */
+html[data-style="christmas"] h1,
+html[data-style="christmas"] h2,
+html[data-style="christmas"] h3,
+html[data-style="christmas"] .font-display,
+html[data-style="christmas"] .site-brand {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+html[data-style="christmas"] h1 {
+  text-shadow: 0 2px 24px rgba(212, 175, 55, 0.25);
+}
+
+html[data-style="christmas"] .glass {
+  background: rgba(26, 46, 32, 0.88) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Buttons — soft glow, not arcade hard shadow */
+html[data-style="christmas"] .ui-btn {
+  border-radius: 999px !important;
+  border: 1px solid rgba(212, 175, 55, 0.55) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease !important;
+  font-weight: 600;
+}
+
+html[data-style="christmas"] .ui-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--xmas-glow), 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+html[data-style="christmas"] .ui-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+html[data-style="christmas"] .ui-btn-primary {
+  background: linear-gradient(135deg, #c41e3a, #a01830) !important;
+  color: #f4efe6 !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
+}
+
+html[data-style="christmas"] .ui-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d42845, #c41e3a) !important;
+  box-shadow:
+    0 0 28px rgba(196, 30, 58, 0.45),
+    0 0 16px rgba(212, 175, 55, 0.3),
+    0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+html[data-style="christmas"] .ui-btn-outline,
+html[data-style="christmas"] .ui-btn-secondary {
+  background: rgba(46, 139, 87, 0.25) !important;
+  color: #f4efe6 !important;
+  border-color: rgba(46, 139, 87, 0.7) !important;
+}
+
+html[data-style="christmas"] .ui-btn-ghost {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #d4af37 !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+html[data-style="christmas"] .ui-card {
+  background: var(--card) !important;
+  color: var(--card-foreground) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-style="christmas"] .ui-card:hover {
+  border-color: rgba(212, 175, 55, 0.85) !important;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.25),
+    0 12px 36px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Forms */
+html[data-style="christmas"] input,
+html[data-style="christmas"] textarea,
+html[data-style="christmas"] select {
+  background: #15261c !important;
+  color: #f4efe6 !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  border-radius: 10px !important;
+}
+
+html[data-style="christmas"] input:focus,
+html[data-style="christmas"] textarea:focus {
+  outline: none;
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+/* Navbar / Footer */
+html[data-style="christmas"] nav.site-nav {
+  background: rgba(15, 31, 20, 0.92) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+html[data-style="christmas"] nav.site-nav a {
+  color: #c5d4c8;
+}
+
+html[data-style="christmas"] nav.site-nav a:hover {
+  color: #c41e3a;
+}
+
+html[data-style="christmas"] nav.site-nav a:hover .bg-primary,
+html[data-style="christmas"] nav.site-nav .bg-primary {
+  background-color: #c41e3a !important;
+}
+
+html[data-style="christmas"] .site-brand {
+  color: #f4efe6;
+}
+
+html[data-style="christmas"] .site-brand .text-primary {
+  color: #c41e3a !important;
+}
+
+html[data-style="christmas"] a.text-primary,
+html[data-style="christmas"] .text-primary {
+  color: #c41e3a !important;
+}
+
+html[data-style="christmas"] .site-footer {
+  background: linear-gradient(180deg, #0f1f14, #0a1510) !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.4) !important;
+  color: #f4efe6 !important;
+}
+
+html[data-style="christmas"] .site-footer a,
+html[data-style="christmas"] .site-footer p {
+  color: #c5d4c8 !important;
+}
+
+html[data-style="christmas"] .site-footer a:hover {
+  color: #d4af37 !important;
+}
+
+/* Style switcher */
+html[data-style="christmas"] .style-switcher {
+  border-radius: 999px !important;
+  border: 1px solid rgba(212, 175, 55, 0.55) !important;
+  background: rgba(26, 46, 32, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+html[data-style="christmas"] .style-switcher button[aria-pressed="true"] {
+  background: linear-gradient(135deg, #c41e3a, #a01830) !important;
+  color: #f4efe6 !important;
+  box-shadow: 0 0 16px rgba(196, 30, 58, 0.45);
+}
+
+/* Lobby / shared panels */
+html[data-style="christmas"] .lobby-card {
+  background: rgba(26, 46, 32, 0.92) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3) !important;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease !important;
+}
+
+html[data-style="christmas"] .lobby-card:hover {
+  border-color: rgba(212, 175, 55, 0.9) !important;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.2),
+    0 12px 32px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(-3px);
+}
+
+html[data-style="christmas"] .hover-glow:hover {
+  box-shadow:
+    0 0 28px rgba(212, 175, 55, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-style="christmas"] .lang-switcher {
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  border-radius: 12px !important;
+  background: rgba(26, 46, 32, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+html[data-style="christmas"] .retro-badge,
+html[data-style="christmas"] [data-retro-badge] {
+  border-radius: 999px !important;
+  border: 1px solid rgba(212, 175, 55, 0.55) !important;
+  background: rgba(196, 30, 58, 0.2) !important;
+  color: #d4af37 !important;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  box-shadow: none;
+  text-transform: uppercase;
+}
+
+html[data-style="christmas"] .word-game .lobby-card {
+  background: rgba(26, 46, 32, 0.95);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+html[data-style="christmas"] ::selection {
+  background: rgba(196, 30, 58, 0.45);
+  color: #f4efe6;
+}
+
+/* ── Live decorations (ChristmasDecor) ── */
+.xmas-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.xmas-decor-light .xmas-corner-accent {
+  opacity: 0.4;
+}
+
+/* Keep side decor in gutters on content pages */
+.xmas-decor-light .xmas-garland-wrap {
+  opacity: 0.55;
+}
+
+.xmas-garland-wrap {
+  position: absolute;
+  top: 3.25rem;
+  left: 0;
+  right: 0;
+  height: 2.75rem;
+  max-height: 2.75rem;
+  overflow: hidden;
+  opacity: 0.85;
+  transform-origin: top center;
+  animation: xmas-sway 5.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+.xmas-decor-light .xmas-garland-wrap {
+  top: 3.5rem;
+  height: 2rem;
+  opacity: 0.7;
+  animation-duration: 7s;
+}
+
+.xmas-tree-wrap {
+  position: absolute;
+  bottom: 5.75rem;
+  left: 0.35rem;
+  opacity: 0.82;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .xmas-tree-wrap {
+    left: 0.75rem;
+    bottom: 6rem;
+  }
+
+  .xmas-tree-wrap .xmas-tree {
+    width: 120px;
+    height: 160px;
+  }
+}
+
+.xmas-gifts-wrap {
+  position: absolute;
+  bottom: 5.75rem;
+  /* Clear language switcher (bottom-right) */
+  right: 6.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.15rem;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .xmas-gifts-wrap {
+    right: 7rem;
+    bottom: 6rem;
+  }
+}
+
+.xmas-gift {
+  --xmas-scale: 1;
+  animation: xmas-bob 3.2s ease-in-out infinite;
+}
+
+.xmas-gift-a {
+  animation-delay: 0s;
+}
+
+.xmas-gift-b {
+  --xmas-scale: 0.85;
+  animation-delay: 0.45s;
+}
+
+.xmas-gift-c {
+  --xmas-scale: 0.7;
+  animation-delay: 0.9s;
+  margin-bottom: 0.35rem;
+}
+
+.xmas-corner-accent {
+  position: absolute;
+  bottom: 5rem;
+  right: 0.5rem;
+  opacity: 0.55;
+}
+
+.xmas-gift-mini {
+  width: 40px;
+  height: 40px;
+  animation: xmas-bob 3.6s ease-in-out infinite;
+}
+
+.xmas-light {
+  animation: xmas-twinkle-fill 2.4s ease-in-out infinite;
+}
+
+.xmas-light-delay {
+  animation-delay: 0.8s;
+}
+
+.xmas-star {
+  transform-origin: 60px 15px;
+  animation: xmas-twinkle-fill 2.8s ease-in-out infinite;
+}
+
+.xmas-twinkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d4af37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+  animation: xmas-twinkle-dot 2.6s ease-in-out infinite;
+}
+
+.xmas-twinkle-delay {
+  background: #c41e3a;
+  box-shadow: 0 0 8px rgba(196, 30, 58, 0.75);
+  animation-delay: 1.1s;
+}
+
+.xmas-gift-shine {
+  animation: xmas-shine 3s ease-in-out infinite;
+}
+
+@keyframes xmas-sway {
+  0%,
+  100% {
+    transform: rotate(-0.6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0.6deg) translateY(2px);
+  }
+}
+
+@keyframes xmas-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(var(--xmas-scale, 1));
+  }
+  50% {
+    transform: translateY(-5px) scale(var(--xmas-scale, 1));
+  }
+}
+
+@keyframes xmas-twinkle-fill {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes xmas-twinkle-dot {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes xmas-shine {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Hide side decor on very small screens so content stays first */
+@media (max-width: 480px) {
+  .xmas-tree-wrap {
+    opacity: 0.45;
+    transform: scale(0.7);
+    transform-origin: bottom left;
+  }
+
+  .xmas-gifts-wrap {
+    opacity: 0.5;
+    transform: scale(0.75);
+    transform-origin: bottom right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="christmas"] .ui-btn,
+  html[data-style="christmas"] .lobby-card {
+    transition: none !important;
+  }
+
+  html[data-style="christmas"] .lobby-card:hover {
+    transform: none;
+  }
+
+  .xmas-garland-wrap,
+  .xmas-gift,
+  .xmas-gift-mini,
+  .xmas-light,
+  .xmas-star,
+  .xmas-twinkle,
+  .xmas-gift-shine {
+    animation: none !important;
+  }
+
+  .xmas-static .xmas-garland-wrap,
+  .xmas-static .xmas-gift,
+  .xmas-static .xmas-light,
+  .xmas-static .xmas-star,
+  .xmas-static .xmas-twinkle {
+    animation: none !important;
+  }
+}

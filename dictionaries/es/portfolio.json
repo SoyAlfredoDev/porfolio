@@ -1,0 +1,18 @@
+{
+  "portfolio": {
+    "badge": "Portafolio Web",
+    "count": "{count} proyectos",
+    "title": "Proyectos que he",
+    "titleHighlight": "creado",
+    "subtitle": "Una selección de sitios y sistemas reales. Explora por categoría y visita el trabajo en vivo.",
+    "viewSite": "Ver sitio",
+    "goToProject": "Ir al proyecto {n}",
+    "filters": {
+      "all": "Todas",
+      "web": "Página web",
+      "landing": "Landing page",
+      "software": "Software",
+      "ai": "Integración IA"
+    }
+  }
+}

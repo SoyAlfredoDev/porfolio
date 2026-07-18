@@ -1,24 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useT } from "@/context/LanguageContext";
+import { Reveal } from "@/components/animation";
 
 export function About() {
   const t = useT();
   return (
     <section id="about" className="py-20 md:py-32 relative">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
+        <Reveal inView className="max-w-4xl mx-auto">
+          <span
+            className="retro-badge inline-block text-primary font-mono text-sm tracking-wider uppercase mb-4 px-3 py-1"
+            data-retro-badge
+          >
             {t("about.badge")}
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mb-8">
@@ -48,20 +46,17 @@ export function About() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-2xl transform rotate-3 group-hover:rotate-1 transition-transform duration-300 opacity-20" />
               <div className="relative bg-secondary/50 backdrop-blur-sm border border-border rounded-2xl h-full min-h-[300px] overflow-hidden">
-                {/* Replace with /public/about.jpg */}
-                <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-muted-foreground">
-                  <div className="text-center">
-                    <p className="text-sm">About Image Placeholder</p>
-                    <p className="text-xs text-muted-foreground/50 opacity-60">
-                      1080x1350px recommended
-                    </p>
-                  </div>
-                </div>
-                {/* <Image src="/about.jpg" alt="Alfredo Hurtado" fill className="object-cover" /> */}
+                <Image
+                  src="/me/alfredoHurtado.png"
+                  alt="Alfredo Hurtado"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 480px"
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

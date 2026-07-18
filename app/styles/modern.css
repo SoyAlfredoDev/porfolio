@@ -1,0 +1,291 @@
+/* ── Modern subtle living skin ── */
+/* Applied when <html data-style="modern"> */
+
+html[data-style="modern"] {
+  --modern-glow: 0 8px 28px rgba(1, 198, 118, 0.18);
+  --modern-orb-a: rgba(1, 198, 118, 0.16);
+  --modern-orb-b: rgba(14, 165, 233, 0.1);
+  --modern-orb-c: rgba(1, 198, 118, 0.08);
+}
+
+html.dark[data-style="modern"],
+html[data-style="modern"].dark,
+html[data-theme="dark"][data-style="modern"] {
+  --modern-orb-a: rgba(1, 198, 118, 0.14);
+  --modern-orb-b: rgba(56, 189, 248, 0.1);
+  --modern-orb-c: rgba(1, 198, 118, 0.07);
+  --modern-glow: 0 10px 32px rgba(1, 198, 118, 0.22);
+}
+
+/* Soft UI motion — quieter than retro/christmas */
+html[data-style="modern"] .ui-btn {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease !important;
+}
+
+html[data-style="modern"] .ui-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--modern-glow);
+}
+
+html[data-style="modern"] .ui-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+html[data-style="modern"] .ui-btn-primary:hover:not(:disabled) {
+  box-shadow:
+    0 0 0 1px rgba(1, 198, 118, 0.25),
+    0 10px 28px rgba(1, 198, 118, 0.28);
+}
+
+html[data-style="modern"] .ui-card,
+html[data-style="modern"] .lobby-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.25s ease !important;
+}
+
+html[data-style="modern"] .ui-card:hover,
+html[data-style="modern"] .lobby-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(2, 31, 65, 0.08);
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+}
+
+html.dark[data-style="modern"] .ui-card:hover,
+html.dark[data-style="modern"] .lobby-card:hover,
+html[data-style="modern"].dark .ui-card:hover,
+html[data-style="modern"].dark .lobby-card:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+html[data-style="modern"] .hover-glow:hover {
+  box-shadow: 0 12px 36px rgba(1, 198, 118, 0.22);
+}
+
+/* ── Site-wide atmosphere ── */
+.modern-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.modern-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.modern-orb-a {
+  top: -8%;
+  left: 8%;
+  width: min(42vw, 420px);
+  height: min(42vw, 420px);
+  background: var(--modern-orb-a);
+  animation: modern-drift-a 22s ease-in-out infinite;
+}
+
+.modern-orb-b {
+  right: -6%;
+  bottom: 10%;
+  width: min(38vw, 380px);
+  height: min(38vw, 380px);
+  background: var(--modern-orb-b);
+  animation: modern-drift-b 28s ease-in-out infinite;
+}
+
+.modern-orb-c {
+  top: 42%;
+  left: 38%;
+  width: min(28vw, 280px);
+  height: min(28vw, 280px);
+  background: var(--modern-orb-c);
+  animation: modern-drift-c 18s ease-in-out infinite;
+}
+
+.modern-atmosphere-light .modern-orb-a,
+.modern-atmosphere-light .modern-orb-b {
+  opacity: 0.55;
+  filter: blur(90px);
+}
+
+.modern-atmosphere-light .modern-orb-a {
+  animation-duration: 30s;
+}
+
+.modern-atmosphere-light .modern-orb-b {
+  animation-duration: 36s;
+}
+
+.modern-dust {
+  position: absolute;
+  inset: 0;
+}
+
+.modern-dust-dot {
+  position: absolute;
+  top: 110%;
+  left: var(--d-x, 50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--primary) 55%, transparent);
+  opacity: 0;
+  animation: modern-dust-rise var(--d-dur, 12s) linear infinite;
+  animation-delay: var(--d-delay, 0s);
+}
+
+.modern-atmosphere-light .modern-dust-dot {
+  opacity: 0;
+  width: 2px;
+  height: 2px;
+}
+
+.modern-sweep {
+  position: absolute;
+  top: -20%;
+  left: -30%;
+  width: 45%;
+  height: 140%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.04) 48%,
+    transparent 62%
+  );
+  transform: rotate(12deg);
+  animation: modern-sweep 14s ease-in-out infinite;
+}
+
+html.dark[data-style="modern"] .modern-sweep,
+html[data-style="modern"].dark .modern-sweep {
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(1, 198, 118, 0.04) 48%,
+    transparent 62%
+  );
+}
+
+.modern-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    transparent 40%,
+    color-mix(in srgb, var(--background) 35%, transparent) 100%
+  );
+  opacity: 0.5;
+}
+
+@keyframes modern-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, 6%) scale(1.06);
+  }
+}
+
+@keyframes modern-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, -4%) scale(1.08);
+  }
+}
+
+@keyframes modern-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3%, -5%);
+  }
+}
+
+@keyframes modern-dust-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.45;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(12px);
+    opacity: 0;
+  }
+}
+
+@keyframes modern-sweep {
+  0%,
+  100% {
+    transform: translateX(-10%) rotate(12deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(120%) rotate(12deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .modern-orb-c,
+  .modern-sweep {
+    display: none;
+  }
+
+  .modern-dust-dot:nth-child(n + 5) {
+    display: none;
+  }
+
+  .modern-orb-a,
+  .modern-orb-b {
+    filter: blur(70px);
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="modern"] .ui-btn,
+  html[data-style="modern"] .ui-card,
+  html[data-style="modern"] .lobby-card {
+    transition: none !important;
+  }
+
+  html[data-style="modern"] .ui-btn:hover:not(:disabled),
+  html[data-style="modern"] .ui-card:hover,
+  html[data-style="modern"] .lobby-card:hover {
+    transform: none;
+  }
+
+  .modern-orb,
+  .modern-dust-dot,
+  .modern-sweep {
+    animation: none !important;
+  }
+
+  .modern-static .modern-orb,
+  .modern-static .modern-dust-dot,
+  .modern-static .modern-sweep {
+    animation: none !important;
+  }
+}

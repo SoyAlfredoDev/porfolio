@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { locales, type Locale } from "@/lib/translation";
+import { translatePathname } from "@/lib/routes";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -14,34 +15,37 @@ export default function LanguageSwitcher() {
   })();
 
   const setLocale = (next: Locale) => {
-    const parts = pathname.split("/");
-
-    if (locales.includes(parts[1] as Locale)) {
-      parts[1] = next;
-    } else {
-      parts.splice(1, 0, next);
-    }
-
-    const newPath = parts.join("/") || `/${next}`;
-    router.push(newPath);
+    router.push(translatePathname(pathname, next));
   };
 
   return (
-    <div className="fixed bottom-4 right-4 flex gap-2 bg-black/40 backdrop-blur px-2 py-2 rounded-lg border border-white/10">
-      <span className="px-2 py-1 text-sm border border-white/10 rounded">
-        {(currentLocale ?? "es").toUpperCase()}
-      </span>
-
+    <div className="lang-switcher fixed bottom-4 right-4 z-[90] flex gap-1 bg-black/50 backdrop-blur-md px-1.5 py-1.5 rounded-xl border border-border/40 shadow-lg">
       <button
+        type="button"
         onClick={() => setLocale("es")}
-        className="px-3 py-1 rounded border border-white/10 hover:border-white/30"
+        aria-pressed={currentLocale === "es"}
+        aria-label="Español"
+        data-retro-label
+        className={`ui-btn ui-btn-outline min-h-11 min-w-11 px-3 py-2 rounded-lg border border-border/40 text-sm font-semibold ${
+          currentLocale === "es"
+            ? "bg-primary text-primary-foreground border-primary"
+            : "hover:border-primary active:bg-primary/10"
+        }`}
       >
         ES
       </button>
 
       <button
+        type="button"
         onClick={() => setLocale("en")}
-        className="px-3 py-1 rounded border border-white/10 hover:border-white/30"
+        aria-pressed={currentLocale === "en"}
+        aria-label="English"
+        data-retro-label
+        className={`ui-btn ui-btn-outline min-h-11 min-w-11 px-3 py-2 rounded-lg border border-border/40 text-sm font-semibold ${
+          currentLocale === "en"
+            ? "bg-primary text-primary-foreground border-primary"
+            : "hover:border-primary active:bg-primary/10"
+        }`}
       >
         EN
       </button>

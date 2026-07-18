@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "play": "Play",
+    "contact": "Contact"
+  },
+  "lobby": {
+    "explore": "Explore",
+    "exploreTitle": "Where to next?",
+    "portfolioDesc": "Projects and featured work",
+    "playDesc": "Play and win",
+    "contactDesc": "Let's talk about your next project",
+    "services": "Web · Landing pages · Software · AI integration",
+    "featured": "Featured",
+    "viewAll": "View full portfolio"
+  }
+}

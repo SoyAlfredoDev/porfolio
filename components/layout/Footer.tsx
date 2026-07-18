@@ -1,13 +1,31 @@
 "use client";
+
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Heart } from "lucide-react";
-import { useT } from "@/context/LanguageContext";
+import { Github, Linkedin, Heart } from "lucide-react";
+import { useLocale, useT } from "@/context/LanguageContext";
+import { getLocalizedPath, type RouteKey } from "@/lib/routes";
+
+const footerKeys: RouteKey[] = ["home", "portfolio", "play", "contact"];
 
 export function Footer() {
   const t = useT();
+  const locale = useLocale();
+
   return (
-    <footer className="py-8 border-t border-white/10 bg-background text-center relative z-10">
+    <footer className="site-footer py-8 pb-24 md:pb-10 border-t border-border bg-background text-center relative z-10">
       <div className="container mx-auto px-6">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm text-muted-foreground">
+          {footerKeys.map((key) => (
+            <Link
+              key={key}
+              href={getLocalizedPath(locale, key)}
+              className="hover:text-primary transition-colors"
+            >
+              {t(`footer.links.${key}`)}
+            </Link>
+          ))}
+        </nav>
+
         <div className="flex justify-center space-x-6 mb-8 text-muted-foreground">
           <Link
             href="https://github.com/soyalfredodev"

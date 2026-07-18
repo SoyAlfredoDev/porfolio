@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useT } from "@/context/LanguageContext";
+import { Reveal } from "@/components/animation";
+import { MagneticButton } from "@/skills/animation-system/primitives";
+import { SpotlightEffect } from "@/skills/animation-system/effects";
 
 export function Contact() {
   const t = useT();
@@ -28,14 +30,11 @@ export function Contact() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background to-secondary/20 pointer-events-none" />
 
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center max-w-2xl mx-auto"
-        >
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
+        <Reveal inView className="mb-16 text-center max-w-2xl mx-auto">
+          <span
+            className="retro-badge inline-block text-primary font-mono text-sm tracking-wider uppercase mb-4 px-3 py-1"
+            data-retro-badge
+          >
             05. {t("contact.badge")}
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -44,7 +43,7 @@ export function Contact() {
           <p className="text-lg text-muted-foreground">
             {t("contact.description")}
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           {/* Contact Info */}
@@ -73,18 +72,21 @@ export function Contact() {
           {/* Contact Form */}
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 bg-secondary/30 p-8 rounded-2xl border border-white/5"
+            className="lobby-card space-y-6 bg-card/80 p-5 sm:p-8 rounded-2xl border border-border/40 mb-16 md:mb-0"
           >
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
                   {t("contact.form.name")}
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
+                  autoComplete="name"
+                  inputMode="text"
                   required
-                  className="w-full bg-background/50 border border-white/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  className="w-full bg-background/50 border border-border rounded-[var(--radius)] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                   placeholder="John Doe"
                 />
               </div>
@@ -94,9 +96,13 @@ export function Contact() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  enterKeyHint="next"
                   required
-                  className="w-full bg-background/50 border border-white/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  className="w-full bg-background/50 border border-border rounded-[var(--radius)] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                   placeholder="john@example.com"
                 />
               </div>
@@ -108,33 +114,42 @@ export function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 required
-                rows={4}
-                className="w-full bg-background/50 border border-white/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                rows={5}
+                enterKeyHint="send"
+                className="w-full bg-background/50 border border-border rounded-[var(--radius)] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-ring transition-all resize-none"
                 placeholder={t("contact.form.messagePlaceholder")}
               />
             </div>
 
-            <Button
-              type="submit"
-              className={cn(
-                "w-full transition-all",
-                formState === "success"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "",
-              )}
-              disabled={formState === "submitting" || formState === "success"}
-            >
-              {formState === "submitting" ? (
-                t("contact.form.sending")
-              ) : formState === "success" ? (
-                t("contact.form.success")
-              ) : (
-                <>
-                  {t("contact.form.submit")} <Send className="ml-2 w-4 h-4" />
-                </>
-              )}
-            </Button>
+            <SpotlightEffect>
+              <MagneticButton className="w-full">
+                <Button
+                  type="submit"
+                  className={cn(
+                    "w-full transition-all",
+                    formState === "success"
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "",
+                  )}
+                  disabled={
+                    formState === "submitting" || formState === "success"
+                  }
+                >
+                  {formState === "submitting" ? (
+                    t("contact.form.sending")
+                  ) : formState === "success" ? (
+                    t("contact.form.success")
+                  ) : (
+                    <>
+                      {t("contact.form.submit")}{" "}
+                      <Send className="ml-2 w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+              </MagneticButton>
+            </SpotlightEffect>
           </form>
         </div>
       </div>

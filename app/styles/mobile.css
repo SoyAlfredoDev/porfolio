@@ -1,0 +1,198 @@
+/* ── Mobile-first app chrome ── */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  /* iOS rubber-band + fixed layers */
+  overscroll-behavior-y: none;
+  min-height: 100dvh;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Safe areas for fixed chrome */
+.site-nav {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.lang-switcher {
+  bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem)) !important;
+  right: max(1rem, calc(env(safe-area-inset-right, 0px) + 0.5rem)) !important;
+}
+
+.site-footer {
+  padding-bottom: max(2rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem));
+}
+
+/* Touch targets */
+@media (max-width: 768px) {
+  .ui-btn,
+  .style-switcher button,
+  .lang-switcher button,
+  .site-nav button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .style-switcher {
+    gap: 1px;
+    padding: 3px !important;
+    flex-shrink: 0;
+  }
+
+  .style-switcher button {
+    padding: 0.45rem 0.5rem !important;
+    font-size: 0.6rem !important;
+    line-height: 1.1;
+    min-width: 2.75rem;
+  }
+
+  .site-brand {
+    font-size: 1rem !important;
+    max-width: none;
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    padding-bottom: 0.65rem;
+  }
+
+  .site-nav .container {
+    gap: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Stack hero CTAs with comfortable gaps */
+  main > section:first-of-type .flex-col {
+    width: 100%;
+  }
+
+  main > section:first-of-type .ui-btn {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  /* Forms: larger tap fields */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important; /* prevents iOS zoom */
+    min-height: 48px;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  textarea {
+    min-height: 8rem;
+  }
+
+  /* Pressed feel without hover dependency */
+  .ui-btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  html[data-style="retro"] .ui-btn:active:not(:disabled) {
+    transform: translate(2px, 2px) scale(1);
+  }
+
+  /* Atmosphere: keep gutters clear of copy on small screens */
+  .retro-atmosphere,
+  .xmas-decor,
+  .xmas-atmosphere,
+  .modern-atmosphere {
+    z-index: 2 !important;
+  }
+
+  .container,
+  .site-footer,
+  .word-game,
+  main > section,
+  main > div {
+    position: relative;
+    z-index: 30;
+  }
+
+  .site-nav {
+    z-index: 80 !important;
+  }
+
+  .lang-switcher {
+    z-index: 90 !important;
+  }
+
+  /* Hide densest side props on phone */
+  .retro-pipe-left,
+  .retro-pipe-right,
+  .retro-blocks-left,
+  .retro-hud,
+  .retro-shroom,
+  .retro-star-icon,
+  .xmas-tree-wrap,
+  .xmas-gifts-wrap {
+    display: none !important;
+  }
+
+  .xmas-garland-wrap {
+    opacity: 0.45;
+    height: 1.75rem;
+  }
+
+  .retro-world-floor {
+    height: 3.25rem;
+    opacity: 0.85;
+  }
+
+  html[data-style="retro"] main {
+    padding-bottom: 4.5rem !important;
+  }
+
+  html[data-style="christmas"] main {
+    padding-bottom: 4rem !important;
+  }
+
+  /* Retro pixel type: smaller + readable line-height */
+  html[data-style="retro"] h1 {
+    font-size: clamp(1rem, 5.5vw, 1.35rem) !important;
+    line-height: 1.55 !important;
+  }
+
+  html[data-style="retro"] h2 {
+    font-size: clamp(0.9rem, 4.5vw, 1.15rem) !important;
+    line-height: 1.5 !important;
+  }
+
+  html[data-style="retro"] nav.site-nav a {
+    font-size: 0.85rem !important;
+    text-transform: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  html[data-style="retro"] .site-brand {
+    font-size: 0.62rem !important;
+    line-height: 1.4;
+  }
+}
+
+/* Mobile menu links */
+@media (max-width: 768px) {
+  .site-nav .mobile-nav-link {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-btn:active:not(:disabled) {
+    transform: none;
+  }
+}

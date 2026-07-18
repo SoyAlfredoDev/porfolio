@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) multipage portfolio (ES/EN) with a performance-first animation system, mobile-first UX, and PWA install support.
+
+## Animation system
+
+See [`skills/animation-system/README.md`](skills/animation-system/README.md) and [usage examples](skills/animation-system/docs/usage-examples.md).
+
+- Lenis smooth scroll (off with reduced-motion **and on mobile/touch**)
+- Style switcher: `modern` / `retro` / `christmas` in Navbar
+- Home: lazy atmosphere by style; heavy FX capped on mobile
+- Portafolio / Contact: light primitives only
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001/es](http://localhost:3001/es) (or the port Next prints). Prefer Chrome DevTools device mode at **390×844**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Mobile
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Safe-area insets for notch / home indicator (`viewport-fit=cover`)
+- Touch targets ≥ 44px (nav, StyleSwitcher, lang, theme)
+- Dense arcade/festive props hidden on small screens; snow/clouds stay light
+- Contact form uses `inputMode` / `autoComplete` and 16px inputs (no iOS zoom)
 
-## Learn More
+## PWA — install as an app
 
-To learn more about Next.js, take a look at the following resources:
+Production only (service worker is **not** registered in `npm run dev`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build && npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then open the site on your phone (same Wi‑Fi / deployed URL).
+
+### Android (Chrome)
+
+1. Open the site → menu **⋮**
+2. **Install app** / **Add to Home screen**
+3. Launch from the icon — opens `standalone` (no browser chrome)
+
+### iPhone / iPad (Safari)
+
+1. Open the site in **Safari** (not in-app browsers)
+2. Share → **Add to Home Screen**
+3. Open the icon — status bar uses `black-translucent`
+
+### Verify PWA locally (desktop)
+
+1. `npm run build && npm start`
+2. Chrome → DevTools → **Application** → Manifest + Service Workers
+3. Confirm `/manifest.webmanifest`, icons 192/512, SW `sw.js` activated
+
+Icons live in [`public/icons/`](public/icons/) (placeholders — replace anytime; see that folder’s README).
+
+Manifest: `app/manifest.ts` · SW: `public/sw.js` · Register: `components/pwa/RegisterSW.tsx`
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy with the [Vercel Platform](https://vercel.com/new). After deploy, use the HTTPS URL to install the PWA on a real device.

@@ -1,0 +1,133 @@
+export type ProjectCategory = "web" | "landing" | "software" | "ai";
+
+export type PortfolioProject = {
+  id: string;
+  name: string;
+  category: ProjectCategory;
+  description: { es: string; en: string };
+  url?: string;
+  tags: string[];
+};
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
+  "web",
+  "landing",
+  "software",
+  "ai",
+];
+
+export const CATEGORY_ACCENTS: Record<
+  ProjectCategory,
+  { from: string; to: string; glow: string }
+> = {
+  web: {
+    from: "#01c676",
+    to: "#34d399",
+    glow: "rgba(1, 198, 118, 0.35)",
+  },
+  landing: {
+    from: "#0ea5e9",
+    to: "#38bdf8",
+    glow: "rgba(14, 165, 233, 0.35)",
+  },
+  software: {
+    from: "#1d4ed8",
+    to: "#3b82f6",
+    glow: "rgba(29, 78, 216, 0.35)",
+  },
+  ai: {
+    from: "#f59e0b",
+    to: "#fbbf24",
+    glow: "rgba(245, 158, 11, 0.35)",
+  },
+};
+
+export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
+  {
+    id: "isapres-premium",
+    name: "Isapres Premium",
+    category: "landing",
+    description: {
+      es: "Landing page para comparador de isapres con diseño claro, enfoque comercial y experiencia optimizada para conversión.",
+      en: "Landing page for an isapre comparator with a clear design, commercial focus, and conversion-optimized experience.",
+    },
+    url: "https://isaprespremium.cl/",
+    tags: ["WordPress", "Landing Page", "Responsive"],
+  },
+  {
+    id: "desde-tu-7",
+    name: "Desde Tu 7%",
+    category: "landing",
+    description: {
+      es: "Plataforma de cotización de isapres con cotizador digital, agenda online y valor UF en tiempo real.",
+      en: "Isapre quotation platform with a digital quote tool, online scheduling, and real-time UF value.",
+    },
+    url: "https://desdetu7.cl/",
+    tags: ["Next.js", "Vercel", "Isapres"],
+  },
+  {
+    id: "estudio-lyv",
+    name: "Estudio LyV",
+    category: "web",
+    description: {
+      es: "Sitio institucional moderno para estudio creativo, con navegación fluida y presentación visual de servicios.",
+      en: "Modern institutional site for a creative studio, with fluid navigation and a visual presentation of services.",
+    },
+    url: "https://www.estudiolyv.cl/",
+    tags: ["Next.js", "Vercel", "UI/UX"],
+  },
+  {
+    id: "turismo-dabar",
+    name: "Turismo Dabar",
+    category: "landing",
+    description: {
+      es: "Landing turística con propuesta visual atractiva, información de destinos y diseño orientado a captación de visitantes.",
+      en: "Tourism landing with an attractive visual proposal, destination info, and a design focused on capturing visitors.",
+    },
+    url: "https://turismodabar.cl/",
+    tags: ["Next.js", "Vercel", "Turismo"],
+  },
+  {
+    id: "hotel-casa-paraiso",
+    name: "Hotel Casa Paraíso",
+    category: "web",
+    description: {
+      es: "Sitio de hotel con reservas en línea, catálogo de habitaciones y experiencia de compra integrada.",
+      en: "Hotel website with online bookings, room catalog, and an integrated purchase experience.",
+    },
+    url: "https://hotelcasaparaiso.cl/",
+    tags: ["Next.js", "Vercel", "Reservas"],
+  },
+  {
+    id: "cotizalo-antes",
+    name: "Cotízalo Antes",
+    category: "software",
+    description: {
+      es: "Plataforma integral de cotización de isapres: sitio web y sistema de gestión para comparar y cotizar planes de salud.",
+      en: "End-to-end isapre quotation platform: website and management system to compare and quote health plans.",
+    },
+    url: "https://cotizaloantes.cl/",
+    tags: ["Página", "Sistema", "Isapres"],
+  },
+  {
+    id: "cotizador-premium",
+    name: "Cotizador Premium",
+    category: "software",
+    description: {
+      es: "Comparador de planes Isapre con cotizador en vivo, directorio de isapres y red de asesores certificados.",
+      en: "Isapre plan comparator with a live quote tool, isapre directory, and a network of certified advisors.",
+    },
+    url: "https://cotizadorpremium.cl/",
+    tags: ["Next.js", "Vercel", "Isapres"],
+  },
+  {
+    id: "ai-assist",
+    name: "Asistente IA de Cotización",
+    category: "ai",
+    description: {
+      es: "Integración de asistencia con IA para orientar cotizaciones, responder consultas frecuentes y acelerar el flujo comercial.",
+      en: "AI assistance integration to guide quotes, answer FAQs, and speed up the commercial flow.",
+    },
+    tags: ["IA", "Integración", "Automatización"],
+  },
+];

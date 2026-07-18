@@ -46,7 +46,7 @@ export function Newsletter({ variant = 'default' }: NewsletterProps) {
   const content = copy[variant]
 
   return (
-    <div className="w-full max-w-md mx-auto mt-12 bg-secondary/30 border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+    <div className="lobby-card w-full max-w-md mx-auto mt-12 bg-card/90 border border-border/40 rounded-2xl p-6 md:p-8">
       <div className="text-center mb-6">
         <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
            <Mail className="w-6 h-6" />
@@ -65,7 +65,7 @@ export function Newsletter({ variant = 'default' }: NewsletterProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === 'loading' || status === 'success'}
-            className="w-full bg-background/50 border border-white/10 rounded-md px-4 py-3 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+            className="w-full bg-background/50 border border-border rounded-[var(--radius)] px-4 py-3 text-center focus:outline-none focus:ring-2 focus:ring-ring transition-all disabled:opacity-50"
           />
         </div>
 

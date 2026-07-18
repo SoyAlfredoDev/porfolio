@@ -1,0 +1,18 @@
+{
+  "portfolio": {
+    "badge": "Web Portfolio",
+    "count": "{count} projects",
+    "title": "Projects I've",
+    "titleHighlight": "built",
+    "subtitle": "A selection of real sites and systems. Filter by category and visit the live work.",
+    "viewSite": "View site",
+    "goToProject": "Go to project {n}",
+    "filters": {
+      "all": "All",
+      "web": "Website",
+      "landing": "Landing page",
+      "software": "Software",
+      "ai": "AI integration"
+    }
+  }
+}

@@ -126,12 +126,15 @@ export function WordGame() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="relative bg-secondary/20 border border-white/10 rounded-3xl p-6 md:p-12 overflow-hidden shadow-2xl">
+    <div className="word-game max-w-2xl mx-auto">
+      <div className="lobby-card relative bg-card/90 border border-border/40 rounded-3xl p-6 md:p-12 overflow-hidden shadow-2xl">
         
         {/* Status Header */}
         <div className="text-center mb-8">
-          <span className="inline-block py-1 px-3 rounded-full bg-primary/20 text-primary text-xs font-mono mb-4 tracking-widest uppercase">
+          <span
+            className="retro-badge inline-block py-1 px-3 rounded-full bg-primary/20 text-primary text-xs font-mono mb-4 tracking-widest uppercase"
+            data-retro-badge
+          >
             Mini Game
           </span>
           <h1 className="text-3xl md:text-5xl font-bold mb-2">Guess The Word</h1>
@@ -165,7 +168,7 @@ export function WordGame() {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Type a word..."
-                    className="w-full bg-background border-2 border-white/10 rounded-xl px-4 py-4 text-center text-2xl font-bold tracking-widest uppercase focus:outline-none focus:border-primary/50 transition-all shadow-[0_0_0_1px_rgba(255,255,255,0)] focus:shadow-[0_0_20px_0_rgba(var(--primary),0.2)]"
+                    className="w-full bg-background border-2 border-border rounded-[var(--radius)] px-4 py-4 text-center text-2xl font-bold tracking-widest uppercase focus:outline-none focus:border-primary transition-all"
                     maxLength={10}
                     autoComplete="off"
                   />
@@ -182,7 +185,7 @@ export function WordGame() {
                         key={i}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex justify-between items-center bg-white/5 px-4 py-3 rounded-lg border border-white/5"
+                        className="lobby-card flex justify-between items-center bg-muted/40 px-4 py-3 rounded-lg border border-border/30"
                      >
                         <span className="font-bold tracking-wider">{item.word}</span>
                         <span className="text-sm text-muted-foreground">

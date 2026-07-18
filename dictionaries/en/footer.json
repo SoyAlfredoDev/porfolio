@@ -1,6 +1,12 @@
 {
   "footer": {
     "title": "Made with ❤️ by",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "links": {
+      "home": "Home",
+      "portfolio": "Portfolio",
+      "play": "Play",
+      "contact": "Contact"
+    }
   }
 }
