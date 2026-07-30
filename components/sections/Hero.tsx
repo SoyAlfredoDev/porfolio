@@ -87,19 +87,12 @@ export function Hero() {
 
         <Reveal delay={0.26}>
           <SpotlightEffect className="inline-flex">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <MagneticButton>
                 <Link href={getLocalizedPath(locale, "portfolio")}>
                   <Button size="lg" className="group">
                     {t("hero.cta.projects")}
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </MagneticButton>
-              <MagneticButton>
-                <Link href={getLocalizedPath(locale, "play")}>
-                  <Button variant="outline" size="lg">
-                    {t("hero.cta.play")}
                   </Button>
                 </Link>
               </MagneticButton>

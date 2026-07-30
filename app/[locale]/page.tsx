@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <About />
       <LobbyExplore />
-      <Projects limit={2} showArchiveLink={false} preview />
+      <Projects limit={4} showArchiveLink={false} preview />
       <Footer />
     </main>
   );

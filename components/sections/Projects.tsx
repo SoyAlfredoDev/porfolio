@@ -1,49 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { ExternalLink, Github, Folder } from "lucide-react";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { useLocale, useT } from "@/context/LanguageContext";
 import { getLocalizedPath } from "@/lib/routes";
-
-const projects = [
-  {
-    title: "AI Analytics Dashboard",
-    description:
-      "A comprehensive dashboard for visualizing AI model performance metrics in real-time. Built with Next.js and Tremor.",
-    tags: ["Next.js", "TypeScript", "Tailwind", "Recharts"],
-    links: { demo: "https://example.com", repo: "https://github.com" },
-  },
-  {
-    title: "E-Commerce Platform",
-    description:
-      "A headless e-commerce solution with Shopify integration, featuring a custom cart and checkout flow.",
-    tags: ["React", "Redux", "Shopify API", "Stripe"],
-    links: { demo: "https://example.com", repo: "https://github.com" },
-  },
-  {
-    title: "Social Media App",
-    description:
-      "A real-time social platform with features like live chat, notifications, and media sharing.",
-    tags: ["Vue.js", "Firebase", "Node.js", "Socket.io"],
-    links: { demo: "https://example.com", repo: "https://github.com" },
-  },
-  {
-    title: "Portfolio v1",
-    description:
-      "My previous portfolio site built with Gatsby and Styled Components. showcasing early design work.",
-    tags: ["Gatsby", "Styled Components", "GraphQL"],
-    links: { demo: "https://example.com", repo: "https://github.com" },
-  },
-];
+import {
+  CATEGORY_ACCENTS,
+  PORTFOLIO_PROJECTS,
+  type PortfolioProject,
+} from "@/lib/portfolio-data";
+import { type Locale } from "@/lib/translation";
 
 type ProjectsProps = {
   limit?: number;
@@ -51,87 +19,161 @@ type ProjectsProps = {
   preview?: boolean;
 };
 
+function getHost(url?: string) {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+function FeaturedCard({
+  project,
+  locale,
+  index,
+  viewLabel,
+}: {
+  project: PortfolioProject;
+  locale: Locale;
+  index: number;
+  viewLabel: string;
+}) {
+  const accent = CATEGORY_ACCENTS[project.category];
+  const host = getHost(project.url);
+  const description = project.description[locale] ?? project.description.es;
+
+  const content = (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      viewport={{ once: true }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-transform duration-300 hover:-translate-y-1.5"
+      style={{
+        boxShadow: `0 18px 40px ${accent.glow}`,
+      }}
+    >
+      <div
+        className="relative aspect-[16/10] overflow-hidden"
+        style={{
+          background: `linear-gradient(145deg, ${accent.from}28, ${accent.to}18, var(--card))`,
+        }}
+      >
+        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(11,18,32,.4)_1px,transparent_1px),linear-gradient(90deg,rgba(11,18,32,.4)_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur">
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: accent.from }}
+          />
+          {host ?? project.name}
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span
+            className="flex h-16 w-16 items-center justify-center rounded-2xl text-2xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
+            style={{
+              background: `linear-gradient(135deg, ${accent.from}, ${accent.to})`,
+            }}
+          >
+            {project.name.charAt(0)}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <div className="mb-2 flex items-start justify-between gap-3">
+          <h3 className="text-xl font-bold tracking-tight">{project.name}</h3>
+          {project.url && (
+            <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+          )}
+        </div>
+        <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-md bg-muted/60 px-2 py-1 font-mono text-[11px] text-muted-foreground"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        {project.url && (
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+            {viewLabel}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
+        )}
+      </div>
+    </motion.article>
+  );
+
+  if (!project.url) return content;
+
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      aria-label={`${viewLabel}: ${project.name}`}
+    >
+      {content}
+    </a>
+  );
+}
+
 export function Projects({
-  limit,
+  limit = 4,
   showArchiveLink = true,
   preview = false,
 }: ProjectsProps) {
   const t = useT();
   const locale = useLocale();
-  const visible = typeof limit === "number" ? projects.slice(0, limit) : projects;
+  const visible = PORTFOLIO_PROJECTS.filter((p) => p.url).slice(0, limit);
 
   return (
-    <section id="projects" className="py-20 md:py-32">
+    <section id="projects" className="relative py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-64 w-[70%] -translate-x-1/2 bg-[radial-gradient(ellipse,rgba(1,198,118,0.12),transparent_70%)]" />
+      </div>
+
       <div className="container mx-auto px-6">
-        <div className="mb-16">
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
-            {preview ? t("lobby.featured") : "03. Work"}
+        <div className="mb-12 md:mb-16">
+          <span className="mb-3 block font-mono text-sm uppercase tracking-wider text-primary">
+            {preview ? t("lobby.featured") : t("portfolio.titleHighlight")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold">Featured Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+            {t("portfolio.title")}{" "}
+            <span className="text-primary">{t("portfolio.titleHighlight")}</span>
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            {t("lobby.portfolioDesc")}
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {visible.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full flex flex-col hover:-translate-y-2 transition-transform duration-300 bg-secondary/20 border-white/5">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-4">
-                    <Folder className="w-10 h-10 text-primary" />
-                    <div className="flex gap-4">
-                      <Link
-                        href={project.links.repo}
-                        target="_blank"
-                        className="hover:text-primary transition-colors"
-                      >
-                        <Github className="w-5 h-5" />
-                      </Link>
-                      <Link
-                        href={project.links.demo}
-                        target="_blank"
-                        className="hover:text-primary transition-colors"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                      </Link>
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl mb-2">{project.title}</CardTitle>
-                  <CardDescription className="text-base line-clamp-3">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="mt-auto">
-                  <div className="flex flex-wrap gap-3 text-xs font-mono text-muted-foreground">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <FeaturedCard
+              key={project.id}
+              project={project}
+              locale={locale as Locale}
+              index={index}
+              viewLabel={t("portfolio.viewSite")}
+            />
           ))}
         </div>
 
         {(preview || showArchiveLink) && (
-          <div className="mt-16 text-center">
-            {preview ? (
-              <Link href={getLocalizedPath(locale, "portfolio")}>
-                <Button variant="outline" size="lg">
-                  {t("lobby.viewAll")}
-                </Button>
-              </Link>
-            ) : (
-              <Link href="https://github.com" target="_blank">
-                <Button variant="outline" size="lg">
-                  View Full Project Archive
-                </Button>
-              </Link>
-            )}
+          <div className="mt-14 text-center">
+            <Link href={getLocalizedPath(locale, "portfolio")}>
+              <Button variant="outline" size="lg" className="group">
+                {t("lobby.viewAll")}
+                <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Button>
+            </Link>
           </div>
         )}
       </div>

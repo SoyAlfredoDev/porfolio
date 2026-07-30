@@ -72,6 +72,28 @@ export function getClientLabel(
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
+    id: "appsfly-saas",
+    name: "AppsFly SaaS",
+    category: "software",
+    description: {
+      es: "Plataforma SaaS para control de ventas, compras, inventario y gastos. Producto propio de AppsFly.",
+      en: "SaaS platform for sales, purchases, inventory, and expense control. AppsFly’s own product.",
+    },
+    url: "https://appsfly.app",
+    tags: ["SaaS", "Next.js", "Gestión"],
+  },
+  {
+    id: "appsfly-web",
+    name: "AppsFly",
+    category: "web",
+    description: {
+      es: "Sitio corporativo de AppsFly: servicios de desarrollo web, landings, automatización y software a medida en Chile.",
+      en: "AppsFly corporate site: web development, landings, automation, and custom software services in Chile.",
+    },
+    url: "https://appsfly.cl",
+    tags: ["Next.js", "Agencia", "Landing"],
+  },
+  {
     id: "isapres-premium",
     name: "Isapres Premium",
     category: "landing",
@@ -202,6 +224,17 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     url: "https://realstock.cl/",
     tags: ["Web", "Media", "UI/UX"],
     client: SMARTPRO_CLIENT,
+  },
+  {
+    id: "cotizador-inteligente",
+    name: "Cotizador Inteligente",
+    category: "software",
+    description: {
+      es: "Comparador gratuito de Isapres en Chile: cotizador en vivo, calculadora del 7%, catálogo de planes y acompañamiento con asesores.",
+      en: "Free Isapre comparator for Chile: live quote tool, 7% calculator, plan catalog, and advisor-guided recommendations.",
+    },
+    url: "https://cotizadorinteligente.cl/",
+    tags: ["Next.js", "Isapres", "Cotizador"],
   },
   {
     id: "ai-assist",
